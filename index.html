@@ -4,7 +4,6 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1.0" />
-  <title>NatureGallery — Wild Landscapes</title>
   <meta name="description"
     content="Cuộc hành trình qua những cảnh quan thiên nhiên hoang dã — rừng già, thác nước, bầu trời." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -241,10 +240,12 @@
 
     .intro h1 {
       font-family: 'Playfair Display', serif;
-      font-size: clamp(2.8rem, 4.5vw, 5rem);
+      font-size: clamp(2.2rem, 3.5vw, 3.8rem);
       font-weight: 400;
       color: var(--clr-text);
       line-height: 1.0;
+      text-align: center;
+      white-space: nowrap;
       opacity: 0;
       animation: fadeUp 0.8s ease 0.35s forwards;
     }
@@ -378,14 +379,15 @@
       margin-top: 40px;
       display: inline-flex;
       align-items: center;
+      justify-content: center;
       gap: 10px;
       font-size: 9.5px;
       letter-spacing: 0.2em;
       text-transform: uppercase;
       color: rgba(232, 240, 232, 0.65);
       cursor: pointer;
-      padding: 9px 18px;
-      border-radius: 4px;
+      padding: 12px 24px;
+      border-radius: 24px;
       border: 1px solid rgba(227, 239, 38, 0.2);
       background: transparent;
       transition: all 0.3s;
@@ -768,8 +770,7 @@
 
         <!-- INTRO -->
         <div class="intro">
-          <div class="intro-eyebrow">Nature · Wilderness · Wild Light</div>
-          <h1>Wild<br><em>Landscapes</em></h1>
+          <h1>The Landscape </h1>
           <div class="intro-line"></div>
           <p>Chạm vào từng khung cảnh để xem video — mưa rừng, tán cây, con suối, bầu trời.</p>
           <div class="intro-ring">
