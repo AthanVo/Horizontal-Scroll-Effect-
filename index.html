@@ -159,12 +159,13 @@
       transform:scale(0.96);
     }
 
-    #viewport { position:fixed; inset:0; overflow:hidden; contain:content; cursor:grab; }
-    #viewport.dragging { cursor:grabbing; }
+    #viewport { position:fixed; inset:0; overflow:hidden; contain:content; cursor:none; }
+    #viewport.dragging { cursor:none; }
+    #gallery { cursor:none; }
 
     #strip {
       display:flex; flex-direction:row; align-items:center;
-      height:100vh; padding:0 64px; gap:14px;
+      height:100vh; padding:0 80px; gap:32px;
       will-change:transform;
     }
 
@@ -222,8 +223,8 @@
       z-index:10;
     }
     .card-bg {
-      position:absolute; inset:-6px;
-      background-size:cover; background-position:center;
+      position:absolute; inset:0;
+      background-size:cover; background-position:center center;
       transition: transform 0.6s cubic-bezier(0.25,0.46,0.45,0.94), filter 0.5s ease;
     }
     .card:hover .card-bg { transform:scale(1.07); filter:brightness(0.55); }
@@ -317,36 +318,84 @@
       opacity:0; animation:fadeIn 1s ease 2s forwards;
     }
 
-    /* ── Stacked pair — column of 2 cards ── */
+    /* ── Drag hint — custom cursor circle (ALWAYS VISIBLE) ── */
+    #drag-hint {
+      position:fixed; top:50%; left:50%; z-index:9999;
+      width:90px; height:90px; border-radius:50%;
+      background:rgba(255,255,255,0.92);
+      box-shadow:0 8px 32px rgba(0,0,0,0.22), 0 2px 8px rgba(0,0,0,0.12);
+      display:flex; flex-direction:column; align-items:center; justify-content:center;
+      pointer-events:none;
+      transform:translate(-50%,-50%) scale(1);
+      transition:transform 0.25s cubic-bezier(.4,0,.2,1), opacity 0.3s ease, width 0.25s ease, height 0.25s ease;
+      will-change:top,left,transform;
+      opacity:1;
+    }
+    #drag-hint.dragging {
+      width:60px; height:60px;
+      background:rgba(227,239,38,0.85);
+      box-shadow:0 4px 20px rgba(227,239,38,0.35);
+    }
+    #drag-hint.dragging .drag-text { color:#1a1a1a; font-size:9px; }
+    #drag-hint.dragging .drag-arrows span { color:#333; }
+    #drag-hint.player-open { opacity:0 !important; }
+    #drag-hint .drag-text {
+      font-family:'Raleway',sans-serif;
+      font-size:10px; font-weight:600; color:#333;
+      letter-spacing:0.03em; line-height:1.3;
+      text-align:center;
+      transition:font-size 0.25s ease, color 0.25s ease;
+    }
+    #drag-hint .drag-arrows {
+      display:flex; align-items:center; gap:10px;
+      margin-top:3px;
+    }
+    #drag-hint .drag-arrows span {
+      font-size:14px; color:#555; font-weight:700;
+      transition:color 0.25s ease;
+    }
+    #drag-hint .drag-arrows span:first-child { animation:arrowPulseLeft 1.6s ease-in-out infinite; }
+    #drag-hint .drag-arrows span:last-child  { animation:arrowPulseRight 1.6s ease-in-out infinite; }
+    @keyframes arrowPulseLeft  { 0%,100%{transform:translateX(0)} 50%{transform:translateX(-5px)} }
+    @keyframes arrowPulseRight { 0%,100%{transform:translateX(0)} 50%{transform:translateX(5px)} }
+
+    /* ── Stacked pair — column of 2+ cards ── */
     .stack {
       flex-shrink:0;
       display:flex; flex-direction:column;
-      gap:14px; align-items:stretch;
+      gap:16px; align-items:stretch;
       align-self:center;
+      height:88vh;        /* fixed stack height — always fits viewport */
+    }
+    /* Cards in stack stretch to fill instead of using fixed vh */
+    .stack .card {
+      flex:1 1 0;
+      height:auto !important;
+      min-height:0;
     }
 
     /* ── Widths ── */
-    .w-xs     { width:200px; }
-    .w-slim   { width:240px; }
-    .w-narrow { width:300px; }
-    .w-mid    { width:380px; }
-    .w-wide   { width:480px; }
-    .w-hero   { width:560px; }
+    .w-xs     { width:220px; }
+    .w-slim   { width:260px; }
+    .w-narrow { width:320px; }
+    .w-mid    { width:400px; }
+    .w-wide   { width:500px; }
+    .w-hero   { width:580px; }
 
     /* ── Heights ── */
-    .h-xs     { height:30vh; }
-    .h-short  { height:40vh; }
-    .h-mid    { height:56vh; }
-    .h-tall   { height:72vh; }
-    .h-hero   { height:84vh; }
+    .h-xs     { height:28vh; }
+    .h-short  { height:36vh; }
+    .h-mid    { height:48vh; }
+    .h-tall   { height:58vh; }
+    .h-hero   { height:76vh; }
 
-    /* ── Vertical nudges ── */
-    .nudge-up    { margin-top:-80px; }
-    .nudge-up2   { margin-top:-40px; }
-    .nudge-down  { margin-top: 80px; }
-    .nudge-down2 { margin-top: 40px; }
-    .nudge-mid   { margin-top: 24px; }
-    .nudge-neg   { margin-top:-120px; }
+    /* ── Vertical nudges (safe — never clips viewport) ── */
+    .nudge-up    { margin-top:-20px; }
+    .nudge-up2   { margin-top:-10px; }
+    .nudge-down  { margin-top: 40px; }
+    .nudge-down2 { margin-top: 20px; }
+    .nudge-mid   { margin-top: 12px; }
+    .nudge-neg   { margin-top:-30px; }
 
     #strip { align-items: center; }
 
@@ -380,28 +429,46 @@
     #player-topbar.hidden { opacity:0; pointer-events:none; }
 
     .player-back {
-      display:flex; align-items:center; gap:10px; cursor:pointer;
-      border-radius:4px; padding:8px 16px;
-      font-size:10px; letter-spacing:0.2em; text-transform:uppercase;
-      color:rgba(255,255,255,0.9);
+      display:flex; align-items:center; gap:8px; cursor:pointer;
+      border:none; background:none;
+      font-size:13px; font-weight:400; letter-spacing:0.01em;
+      color:rgba(255,255,255,0.85);
       transition:all 0.25s; font-family:'Raleway',sans-serif;
     }
     .player-back:hover { color:#fff; }
+    .player-back svg { opacity:0.7; transition:transform 0.25s, opacity 0.25s; }
+    .player-back:hover svg { opacity:1; transform:translateX(-3px); }
 
     .player-title-wrap { display:flex; flex-direction:column; align-items:center; }
-    .player-label { font-size:8.5px; letter-spacing:0.25em; text-transform:uppercase; color:var(--clr-accent); margin-bottom:3px; }
-    .player-title { font-family:'Playfair Display',serif; font-size:18px; font-weight:400; color:#fff; font-style:italic; }
+    .player-label { font-size:8.5px; letter-spacing:0.25em; text-transform:uppercase; color:var(--clr-accent); margin-bottom:3px; display:none; }
+    .player-title {
+      font-family:'Playfair Display',serif;
+      font-size:clamp(16px,1.6vw,22px); font-weight:400; color:#fff;
+      font-style:italic;
+    }
 
-    /* Focus Mode toggle */
+    /* Focus Mode toggle — dark filled pill */
     .focus-toggle {
       display:flex; align-items:center; gap:8px; cursor:pointer;
-      border-radius:4px; padding:8px 16px;
-      font-size:10px; letter-spacing:0.2em; text-transform:uppercase;
+      border-radius:22px; padding:9px 20px;
+      font-size:12px; letter-spacing:0.04em;
       color:rgba(255,255,255,0.9);
-      transition:all 0.25s; font-family:'Raleway',sans-serif;
+      background:rgba(255,255,255,0.12);
+      border:1px solid rgba(255,255,255,0.18);
+      -webkit-backdrop-filter:blur(12px);
+      backdrop-filter:blur(12px);
+      transition:all 0.3s ease; font-family:'Raleway',sans-serif;
     }
-    .focus-toggle:hover { color:#fff; }
-    .focus-toggle.active { color:var(--clr-accent); }
+    .focus-toggle:hover {
+      background:rgba(255,255,255,0.20);
+      border-color:rgba(255,255,255,0.30);
+      color:#fff;
+    }
+    .focus-toggle.active {
+      background:rgba(227,239,38,0.18);
+      border-color:rgba(227,239,38,0.45);
+      color:var(--clr-accent);
+    }
     .focus-toggle svg { transition:transform 0.3s ease; }
     .focus-toggle.active svg { transform:scale(1.15); }
 
@@ -431,6 +498,15 @@
       <path d="M0 4H28M22 0L28 4L22 8" stroke="currentColor" stroke-width="1"/>
     </svg>
     drag or scroll to explore
+  </div>
+
+  <!-- Circular drag indicator -->
+  <div id="drag-hint">
+    <div class="drag-text">Giữ và kéo</div>
+    <div class="drag-arrows">
+      <span>‹</span>
+      <span>›</span>
+    </div>
   </div>
 
   <div id="viewport">
@@ -705,11 +781,11 @@
 
   <!-- TOP BAR -->
   <div id="player-topbar">
-    <button class="player-back glass-btn" id="player-back-btn">
-      <svg width="18" height="8" viewBox="0 0 18 8" fill="none">
-        <path d="M18 4H0M6 0L0 4L6 8" stroke="currentColor" stroke-width="1.2"/>
+    <button class="player-back" id="player-back-btn">
+      <svg width="14" height="10" viewBox="0 0 14 10" fill="none">
+        <path d="M14 5H1M5 1L1 5L5 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
       </svg>
-      Back to Gallery
+      Back to Library
     </button>
 
     <div class="player-title-wrap">
@@ -717,14 +793,14 @@
       <div class="player-title" id="player-title-el"></div>
     </div>
 
-    <button class="focus-toggle glass-btn" id="focus-mode-btn" title="Toggle Focus Mode">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M8 3H5a2 2 0 0 0-2 2v3"/>
-        <path d="M21 8V5a2 2 0 0 0-2-2h-3"/>
-        <path d="M16 21h3a2 2 0 0 0 2-2v-3"/>
-        <path d="M3 16v3a2 2 0 0 0 2 2h3"/>
+    <button class="focus-toggle" id="focus-mode-btn" title="Toggle Focus Mode">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="15 3 21 3 21 9"/>
+        <polyline points="9 21 3 21 3 15"/>
+        <line x1="21" y1="3" x2="14" y2="10"/>
+        <line x1="3" y1="21" x2="10" y2="14"/>
       </svg>
-      Focus
+      Focus Mode
     </button>
   </div>
 
@@ -739,6 +815,7 @@ const gallery  = document.getElementById('gallery');
 const strip    = document.getElementById('strip');
 const progress = document.getElementById('progress');
 const hint     = document.getElementById('hint');
+const dragHint = document.getElementById('drag-hint');
 
 let targetX = 0, currentX = 0, maxScroll = 0;
 let isDragging = false, dragStartX = 0, dragStartScroll = 0;
@@ -777,16 +854,33 @@ window.addEventListener('touchmove',(e)=>{
 
 const viewport = document.getElementById('viewport');
 let mouseDownX = 0;
+
+// ── Custom cursor: drag-hint follows mouse (ALWAYS ON) ──
+window.addEventListener('mousemove',(e)=>{
+  // Always move the cursor circle to mouse position
+  dragHint.style.left = e.clientX + 'px';
+  dragHint.style.top  = e.clientY + 'px';
+  // Drag scroll
+  if(isDragging && !playerOpen) {
+    targetX=clamp(dragStartScroll+(dragStartX-e.clientX),0,maxScroll);
+  }
+});
+
 window.addEventListener('mousedown',(e)=>{
   if(playerOpen) return;
   isDragging=true; dragStartX=e.clientX; mouseDownX=e.clientX; dragStartScroll=targetX;
   viewport.classList.add('dragging');
+  dragHint.classList.add('dragging');
 });
-window.addEventListener('mouseup',()=>{ isDragging=false; viewport.classList.remove('dragging'); });
-window.addEventListener('mouseleave',()=>{ isDragging=false; viewport.classList.remove('dragging'); });
-window.addEventListener('mousemove',(e)=>{
-  if(!isDragging||playerOpen) return;
-  targetX=clamp(dragStartScroll+(dragStartX-e.clientX),0,maxScroll);
+window.addEventListener('mouseup',()=>{
+  isDragging=false;
+  viewport.classList.remove('dragging');
+  dragHint.classList.remove('dragging');
+});
+window.addEventListener('mouseleave',()=>{
+  isDragging=false;
+  viewport.classList.remove('dragging');
+  dragHint.classList.remove('dragging');
 });
 
 window.addEventListener('keydown',(e)=>{
@@ -827,6 +921,7 @@ let focusMode = false;
 let focusTimeout = null;
 
 function openPlayer(src, label, title) {
+  currentVideoName = src;
   vidEl.src = src;
   vidEl.play().catch(()=>{});
   document.getElementById('player-label-el').textContent = label;
@@ -834,7 +929,31 @@ function openPlayer(src, label, title) {
   gallery.classList.add('hidden');
   player.classList.add('open');
   playerOpen = true;
+  dragHint.classList.add('player-open');
 }
+
+// Video error handler — detect invalid files (e.g. Git LFS pointers)
+let currentVideoName = '';
+vidEl.addEventListener('error', () => {
+  const fname = currentVideoName || 'video';
+  const msg = document.createElement('div');
+  msg.style.cssText = 'position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#fff;font-family:Raleway,sans-serif;z-index:10;background:rgba(0,0,0,0.85);';
+  msg.innerHTML = `
+    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#E3EF26" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom:16px;">
+      <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>
+    </svg>
+    <div style="font-size:16px;font-weight:500;margin-bottom:8px;">Video không tải được</div>
+    <div style="font-size:12px;color:rgba(255,255,255,0.6);max-width:320px;text-align:center;line-height:1.5;">
+      File <strong>${fname}</strong> không phải video hợp lệ.<br>
+      Hãy thay thế bằng file .mp4 thật trong thư mục project.
+    </div>
+  `;
+  player.appendChild(msg);
+  // Remove on close
+  const origClose = closePlayer;
+  closePlayer = function() { msg.remove(); origClose(); closePlayer = origClose; };
+  backBtn.onclick = closePlayer;
+});
 
 function closePlayer() {
   vidEl.pause();
@@ -849,6 +968,7 @@ function closePlayer() {
   player.classList.remove('open');
   gallery.classList.remove('hidden');
   playerOpen = false;
+  dragHint.classList.remove('player-open');
 }
 
 backBtn.addEventListener('click', closePlayer);
