@@ -1,0 +1,910 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>NatureGallery — Wild Landscapes</title>
+  <meta name="description" content="Cuộc hành trình qua những cảnh quan thiên nhiên hoang dã — rừng già, thác nước, bầu trời."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&family=Raleway:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+    body { -webkit-user-select:none; user-select:none; }
+
+    /* ── Palette tokens ── */
+    :root {
+      --clr-bg:       #06231D;
+      --clr-bg2:      #0C342C;
+      --clr-mid:      #076653;
+      --clr-accent:   #E3EF26;
+      --clr-text:     #E8F5E6;
+      --clr-text-sub: rgba(232,245,230,0.38);
+    }
+
+    /* ════════════════════════════════════════
+       FROSTED GLASS MIRROR — Shared System
+    ════════════════════════════════════════ */
+    @keyframes glassSweep {
+      0%   { left: -100%; opacity: 0; }
+      10%  { opacity: 0.6; }
+      60%  { opacity: 0.2; }
+      100% { left: 140%;  opacity: 0; }
+    }
+
+    .glass-btn {
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(
+        148deg,
+        rgba(255,255,255,0.38)  0%,
+        rgba(255,255,255,0.16)  22%,
+        rgba(7,102,83,0.22)     50%,
+        rgba(6,35,29,0.50)      78%,
+        rgba(0,0,0,0.18)       100%
+      ) !important;
+      border: 1.5px solid rgba(255,255,255,0.50) !important;
+      box-shadow:
+        inset  0  2px  2px rgba(255,255,255,0.65),
+        inset  0 -2px  2px rgba(0,0,0,0.30),
+        inset  2px 0   2px rgba(255,255,255,0.12),
+        inset -2px 0   2px rgba(0,0,0,0.15),
+        0 6px 24px rgba(0,0,0,0.45),
+        0 1px  0   rgba(255,255,255,0.25)
+      !important;
+      -webkit-backdrop-filter: blur(18px) saturate(200%) brightness(1.08);
+              backdrop-filter: blur(18px) saturate(200%) brightness(1.08);
+    }
+    .glass-btn::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 55%;
+      background: linear-gradient(
+        to bottom,
+        rgba(255,255,255,0.40) 0%,
+        rgba(255,255,255,0.10) 60%,
+        rgba(255,255,255,0.00) 100%
+      );
+      border-radius: inherit;
+      pointer-events: none;
+      z-index: 1;
+    }
+    .glass-btn::after {
+      content: '';
+      position: absolute;
+      top: -50%; left: -100%;
+      width: 45%; height: 200%;
+      background: linear-gradient(
+        105deg,
+        transparent 0%,
+        rgba(255,255,255,0.55) 50%,
+        transparent 100%
+      );
+      transform: skewX(-20deg);
+      pointer-events: none;
+      z-index: 2;
+    }
+    .glass-btn:hover::after {
+      animation: glassSweep 0.7s cubic-bezier(0.4,0,0.2,1) forwards;
+    }
+    .glass-btn:hover {
+      background: linear-gradient(
+        148deg,
+        rgba(255,255,255,0.52)  0%,
+        rgba(255,255,255,0.24)  22%,
+        rgba(7,102,83,0.32)     50%,
+        rgba(6,35,29,0.45)      78%,
+        rgba(0,0,0,0.12)       100%
+      ) !important;
+      border-color: rgba(255,255,255,0.70) !important;
+      box-shadow:
+        inset  0  2px  2px rgba(255,255,255,0.80),
+        inset  0 -2px  2px rgba(0,0,0,0.25),
+        inset  2px 0   2px rgba(255,255,255,0.18),
+        inset -2px 0   2px rgba(0,0,0,0.1),
+        0 0 0 1.5px rgba(227,239,38,0.35),
+        0 12px 40px rgba(0,0,0,0.55),
+        0 1px  0   rgba(255,255,255,0.45)
+      !important;
+    }
+    .glass-btn > * { position: relative; z-index: 3; }
+
+    .card-play-btn.glass-btn::before {
+      height: 50%;
+      border-radius: 50%;
+    }
+    .ctrl-btn.primary.glass-btn {
+      background: linear-gradient(
+        148deg,
+        rgba(255,255,255,0.55)  0%,
+        rgba(227,239,38,0.60)   30%,
+        rgba(7,102,83,0.85)     65%,
+        rgba(6,35,29,0.70)     100%
+      ) !important;
+    }
+    .ctrl-btn.primary.glass-btn:hover {
+      background: linear-gradient(
+        148deg,
+        rgba(255,255,255,0.65)  0%,
+        rgba(227,239,38,0.80)   30%,
+        rgba(7,102,83,1.00)     65%,
+        rgba(6,35,29,0.75)     100%
+      ) !important;
+      box-shadow:
+        inset  0  2px  2px rgba(255,255,255,0.80),
+        inset  0 -2px  2px rgba(0,0,0,0.25),
+        0 0 0 1.5px rgba(227,239,38,0.55),
+        0 0 28px rgba(227,239,38,0.35),
+        0 14px 44px rgba(0,0,0,0.55)
+      !important;
+    }
+
+    html, body {
+      width:100%; height:100%;
+      overflow:hidden;
+      background:var(--clr-bg);
+      font-family:'Raleway',sans-serif;
+      color:var(--clr-text);
+    }
+
+    /* ═══════════════════════════════════════
+       GALLERY LAYER
+    ═══════════════════════════════════════ */
+    #gallery {
+      position:fixed; inset:0;
+      transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.4,0,0.2,1);
+    }
+    #gallery.hidden {
+      opacity:0; pointer-events:none;
+      transform:scale(0.96);
+    }
+
+    #viewport { position:fixed; inset:0; overflow:hidden; contain:content; cursor:grab; }
+    #viewport.dragging { cursor:grabbing; }
+
+    #strip {
+      display:flex; flex-direction:row; align-items:center;
+      height:100vh; padding:0 64px; gap:14px;
+      will-change:transform;
+    }
+
+    /* ── Intro ── */
+    .intro {
+      flex-shrink:0; width:500px; height:74vh;
+      display:flex; flex-direction:column; justify-content:flex-end;
+      padding:48px 52px; position:relative;
+    }
+    .intro-eyebrow {
+      font-size:9.5px; letter-spacing:0.28em; text-transform:uppercase;
+      color:var(--clr-accent); margin-bottom:18px;
+      opacity:0; animation:fadeUp 0.8s ease 0.2s forwards;
+    }
+    .intro h1 {
+      font-family:'Playfair Display',serif; font-size:clamp(2.8rem,4.5vw,5rem);
+      font-weight:400; color:var(--clr-text); line-height:1.0;
+      opacity:0; animation:fadeUp 0.8s ease 0.35s forwards;
+    }
+    .intro h1 em { color:var(--clr-accent); font-style:italic; }
+    .intro-line {
+      width:0; height:1px; background:rgba(232,245,230,0.2);
+      margin:22px 0; animation:growLine 0.8s ease 0.75s forwards;
+    }
+    .intro p {
+      font-size:12.5px; line-height:1.85; color:var(--clr-text-sub);
+      font-weight:300; max-width:300px;
+      opacity:0; animation:fadeUp 0.8s ease 0.9s forwards;
+    }
+    .intro-ring {
+      position:absolute; top:44px; right:44px; width:80px; height:80px;
+      animation:spinFade 24s linear 1.2s infinite;
+    }
+    .intro-arrow {
+      position:absolute; bottom:44px; right:48px;
+      display:flex; align-items:center; gap:10px;
+      font-size:9px; letter-spacing:0.22em; text-transform:uppercase;
+      color:rgba(240,237,230,0.28);
+      opacity:0; animation:fadeIn 1s ease 1.6s forwards;
+    }
+    .intro-arrow svg { animation:arrowPulse 2s ease-in-out infinite; }
+
+    /* ── Card base ── */
+    .card {
+      flex-shrink:0; border-radius:6px; overflow:hidden;
+      position:relative; cursor:pointer;
+      transition: transform 0.5s cubic-bezier(0.25,0.46,0.45,0.94),
+                  box-shadow 0.5s cubic-bezier(0.25,0.46,0.45,0.94);
+      box-shadow:0 8px 24px rgba(0,0,0,0.5);
+    }
+    .card:hover {
+      transform:translateY(-20px) scale(1.025);
+      box-shadow: 0 44px 72px rgba(0,0,0,0.7),
+                  0 0 0 1px rgba(227,239,38,0.35);
+      z-index:10;
+    }
+    .card-bg {
+      position:absolute; inset:-6px;
+      background-size:cover; background-position:center;
+      transition: transform 0.6s cubic-bezier(0.25,0.46,0.45,0.94), filter 0.5s ease;
+    }
+    .card:hover .card-bg { transform:scale(1.07); filter:brightness(0.55); }
+
+    .card::before {
+      content:''; position:absolute; inset:0; z-index:5; opacity:0.04; pointer-events:none;
+      background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      background-size:180px;
+    }
+    .card-grad {
+      position:absolute; inset:0; z-index:3;
+      background:linear-gradient(to top, rgba(6,35,29,0.92) 0%, rgba(7,102,83,0.15) 42%, transparent 65%);
+      transition:opacity 0.4s;
+    }
+    .card:hover .card-grad { opacity:1.3; }
+    .card-accent {
+      position:absolute; top:0; left:0; right:0; height:2px; z-index:6;
+      background:linear-gradient(90deg, transparent 0%, #E3EF26 35%, #076653 65%, transparent 100%);
+      transform:scaleX(0); transform-origin:center;
+      transition:transform 0.5s cubic-bezier(0.25,0.46,0.45,0.94);
+    }
+    .card:hover .card-accent { transform:scaleX(1); }
+
+    /* Play overlay — always present, reveals on hover */
+    .card-play-btn {
+      position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
+      z-index:7;
+      width:60px; height:60px; border-radius:50%;
+      display:flex; align-items:center; justify-content:center;
+      transition: transform 0.35s cubic-bezier(0.25,0.46,0.45,0.94),
+                  opacity 0.35s ease;
+      opacity:0; pointer-events:none;
+    }
+    .card:hover .card-play-btn {
+      opacity:1; pointer-events:auto;
+      transform:translate(-50%,-60%) scale(1.1);
+    }
+    .card-play-btn svg { margin-left:4px; }
+
+    /* ── Caption ── */
+    .card-caption {
+      position:absolute; bottom:0; left:0; right:0; z-index:4;
+      padding:18px 22px 24px;
+      transform:translateY(8px); opacity:0.35;
+      transition: transform 0.45s cubic-bezier(0.25,0.46,0.45,0.94), opacity 0.4s;
+    }
+    .card:hover .card-caption { transform:translateY(0); opacity:1; }
+    .card-label { font-size:9px; letter-spacing:0.22em; text-transform:uppercase; color:rgba(227,239,38,0.55); margin-bottom:5px; }
+    .card-title { font-family:'Playfair Display',serif; font-size:18px; font-weight:400; color:var(--clr-text); line-height:1.2; transition:font-style 0.3s; }
+    .card:hover .card-title { font-style:italic; }
+    .card-rule { margin-top:10px; height:1px; background:linear-gradient(90deg, #E3EF26, #076653); transform:scaleX(0); transform-origin:left; transition:transform 0.55s cubic-bezier(0.25,0.46,0.45,0.94) 0.05s; }
+    .card:hover .card-rule { transform:scaleX(1); }
+
+    /* ── Text panel ── */
+    .text-panel {
+      flex-shrink:0; width:220px;
+      display:flex; flex-direction:column; gap:14px;
+      padding:32px 28px;
+      border-left:1px solid rgba(227,239,38,0.10);
+    }
+    .text-num { font-size:9px; letter-spacing:0.3em; text-transform:uppercase; color:var(--clr-accent); opacity:0.5; }
+    .text-heading { font-family:'Playfair Display',serif; font-size:1.45rem; font-weight:400; line-height:1.25; }
+    .text-heading em { font-style:italic; color:var(--clr-accent); }
+    .text-body { font-size:11.5px; line-height:1.8; color:var(--clr-text-sub); font-weight:300; }
+    .text-tag { font-size:8.5px; letter-spacing:0.2em; text-transform:uppercase; color:rgba(227,239,38,0.35); }
+
+    /* ── End panel ── */
+    .end-panel {
+      flex-shrink:0; width:340px; height:70vh;
+      display:flex; flex-direction:column; justify-content:center; align-items:flex-start;
+      padding:0 56px; border:1px solid rgba(227,239,38,0.08);
+    }
+    .end-quote { font-family:'Playfair Display',serif; font-size:1.85rem; font-style:italic; color:rgba(232,245,230,0.85); line-height:1.45; margin-bottom:24px; }
+    .end-attr { font-size:9.5px; letter-spacing:0.22em; text-transform:uppercase; color:var(--clr-accent); }
+    .end-back {
+      margin-top:40px; display:inline-flex; align-items:center; gap:10px;
+      font-size:9.5px; letter-spacing:0.2em; text-transform:uppercase;
+      color:rgba(232,245,230,0.75); cursor:pointer;
+      padding:9px 18px; border-radius:4px;
+      transition:all 0.3s; font-family:'Raleway',sans-serif;
+    }
+    .end-back:hover { color:#fff; transform:translateX(-4px); }
+
+    /* ── Progress + hint ── */
+    #progress { position:fixed; bottom:0; left:0; height:2px; background:linear-gradient(90deg, #076653, #E3EF26); width:0%; z-index:200; transition:width 0.08s linear; }
+    #hint {
+      position:fixed; bottom:26px; right:36px; z-index:200;
+      display:flex; align-items:center; gap:10px;
+      font-size:9px; letter-spacing:0.22em; text-transform:uppercase;
+      color:rgba(240,237,230,0.22); pointer-events:none;
+      opacity:0; animation:fadeIn 1s ease 2s forwards;
+    }
+
+    /* ── Stacked pair — column of 2 cards ── */
+    .stack {
+      flex-shrink:0;
+      display:flex; flex-direction:column;
+      gap:14px; align-items:stretch;
+      align-self:center;
+    }
+
+    /* ── Widths ── */
+    .w-xs     { width:200px; }
+    .w-slim   { width:240px; }
+    .w-narrow { width:300px; }
+    .w-mid    { width:380px; }
+    .w-wide   { width:480px; }
+    .w-hero   { width:560px; }
+
+    /* ── Heights ── */
+    .h-xs     { height:30vh; }
+    .h-short  { height:40vh; }
+    .h-mid    { height:56vh; }
+    .h-tall   { height:72vh; }
+    .h-hero   { height:84vh; }
+
+    /* ── Vertical nudges ── */
+    .nudge-up    { margin-top:-80px; }
+    .nudge-up2   { margin-top:-40px; }
+    .nudge-down  { margin-top: 80px; }
+    .nudge-down2 { margin-top: 40px; }
+    .nudge-mid   { margin-top: 24px; }
+    .nudge-neg   { margin-top:-120px; }
+
+    #strip { align-items: center; }
+
+    /* ═══════════════════════════════════════
+       FULLSCREEN PLAYER (YouTube iframe)
+    ═══════════════════════════════════════ */
+    #player {
+      position:fixed; inset:0; z-index:500;
+      background:#000;
+      display:flex; flex-direction:column;
+      opacity:0; pointer-events:none;
+      transition:opacity 0.5s cubic-bezier(0.4,0,0.2,1);
+    }
+    #player.open { opacity:1; pointer-events:auto; }
+
+    #yt-frame {
+      position:absolute; inset:0;
+      width:100%; height:100%;
+      border:none;
+    }
+
+    /* ── Top bar ── */
+    #player-topbar {
+      position:absolute; top:0; left:0; right:0; z-index:10;
+      height:72px;
+      display:flex; align-items:center; justify-content:space-between;
+      padding:0 28px;
+      background:linear-gradient(to bottom, rgba(0,0,0,0.80) 0%, transparent 100%);
+      transition:opacity 0.4s;
+    }
+    #player-topbar.hidden { opacity:0; pointer-events:none; }
+
+    .player-back {
+      display:flex; align-items:center; gap:10px; cursor:pointer;
+      border-radius:4px; padding:8px 16px;
+      font-size:10px; letter-spacing:0.2em; text-transform:uppercase;
+      color:rgba(255,255,255,0.9);
+      transition:all 0.25s; font-family:'Raleway',sans-serif;
+    }
+    .player-back:hover { color:#fff; }
+
+    .player-title-wrap { display:flex; flex-direction:column; align-items:center; }
+    .player-label { font-size:8.5px; letter-spacing:0.25em; text-transform:uppercase; color:var(--clr-accent); margin-bottom:3px; }
+    .player-title { font-family:'Playfair Display',serif; font-size:18px; font-weight:400; color:#fff; font-style:italic; }
+
+    /* Focus Mode toggle */
+    .focus-toggle {
+      display:flex; align-items:center; gap:8px; cursor:pointer;
+      border-radius:4px; padding:8px 16px;
+      font-size:10px; letter-spacing:0.2em; text-transform:uppercase;
+      color:rgba(255,255,255,0.9);
+      transition:all 0.25s; font-family:'Raleway',sans-serif;
+    }
+    .focus-toggle:hover { color:#fff; }
+    .focus-toggle.active { color:var(--clr-accent); }
+    .focus-toggle svg { transition:transform 0.3s ease; }
+    .focus-toggle.active svg { transform:scale(1.15); }
+
+    /* Focus mode state — hide controls */
+    #player.focus-mode #player-topbar { opacity:0; pointer-events:none; }
+    #player.focus-mode video::-webkit-media-controls { display:none !important; }
+    #player.focus-mode video { cursor:none; }
+    /* Show topbar briefly on mouse move via JS */
+    #player.focus-mode.reveal-controls #player-topbar { opacity:1; pointer-events:auto; }
+
+    /* ── Animations ── */
+    @keyframes fadeUp { from{opacity:0;transform:translateY(24px)} to{opacity:1;transform:translateY(0)} }
+    @keyframes fadeIn { from{opacity:0} to{opacity:1} }
+    @keyframes fadeOut { to{opacity:0} }
+    @keyframes growLine { to{width:48px} }
+    @keyframes spinFade { 0%{opacity:0;transform:rotate(0deg)} 12%{opacity:0.5} 100%{opacity:0.5;transform:rotate(360deg)} }
+    @keyframes arrowPulse { 0%,100%{transform:translateX(0)} 50%{transform:translateX(6px)} }
+  </style>
+</head>
+<body>
+
+<!-- ════ GALLERY ════ -->
+<div id="gallery">
+  <div id="progress"></div>
+  <div id="hint">
+    <svg width="28" height="8" viewBox="0 0 28 8" fill="none">
+      <path d="M0 4H28M22 0L28 4L22 8" stroke="currentColor" stroke-width="1"/>
+    </svg>
+    drag or scroll to explore
+  </div>
+
+  <div id="viewport">
+    <div id="strip">
+
+      <!-- INTRO -->
+      <div class="intro">
+        <div class="intro-eyebrow">Nature · Wilderness · Wild Light</div>
+        <h1>Wild<br><em>Landscapes</em></h1>
+        <div class="intro-line"></div>
+        <p>Chạm vào từng khung cảnh để xem video — mưa rừng, tán cây, con suối, bầu trời.</p>
+        <div class="intro-ring">
+          <svg viewBox="0 0 100 100" fill="none">
+            <path id="rp" d="M50,50 m-36,0 a36,36 0 1,1 72,0 a36,36 0 1,1 -72,0" fill="none"/>
+            <text font-size="9" fill="#b06840" font-family="Raleway,sans-serif" letter-spacing="2.8">
+              <textPath href="#rp">NATURE · FOREST · RAIN · WILD ·</textPath>
+            </text>
+            <circle cx="50" cy="50" r="3" fill="#b06840"/>
+          </svg>
+        </div>
+        <div class="intro-arrow">
+          <svg width="28" height="8" viewBox="0 0 28 8" fill="none">
+            <path d="M0 4H28M22 0L28 4L22 8" stroke="currentColor" stroke-width="1"/>
+          </svg>
+          click &amp; scroll
+        </div>
+      </div>
+
+      <!-- BLOCK 1: single hero tall -->
+      <div class="card w-hero h-hero nudge-down"
+           data-src="rung1.mp4" data-label="01 · Rừng Già" data-title="Tiếng Mưa Trong Rừng">
+        <div class="card-bg" style="background-image:url('https://images.unsplash.com/photo-1515694346937-94d85e41e6f0?auto=format&fit=crop&w=1200&q=85');"></div>
+        <div class="card-accent"></div><div class="card-grad"></div>
+        <div class="card-play-btn glass-btn">
+          <svg width="18" height="20" viewBox="0 0 18 20" fill="none"><path d="M2 2L16 10L2 18V2Z" fill="white" stroke="white" stroke-width="1.5" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="card-caption"><div class="card-label">01 · Rừng Già</div><div class="card-title">Tiếng Mưa Trong Rừng</div><div class="card-rule"></div></div>
+      </div>
+
+      <!-- BLOCK 2: stack narrow — short + tall -->
+      <div class="stack nudge-up">
+        <div class="card w-narrow h-xs"
+             data-src="rung1.mp4" data-label="02 · Sky" data-title="Bầu Trời Xanh">
+          <div class="card-bg" style="background-image:url('https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=format&fit=crop&w=900&q=85');"></div>
+          <div class="card-accent"></div><div class="card-grad"></div>
+          <div class="card-play-btn glass-btn">
+            <svg width="14" height="16" viewBox="0 0 18 20" fill="none"><path d="M2 2L16 10L2 18V2Z" fill="white" stroke="white" stroke-width="1.5" stroke-linejoin="round"/></svg>
+          </div>
+          <div class="card-caption"><div class="card-label">02 · Sky</div><div class="card-title">Bầu Trời Xanh</div><div class="card-rule"></div></div>
+        </div>
+        <div class="card w-narrow h-tall"
+             data-src="rung1.mp4" data-label="03 · Stream" data-title="Con Suối Rừng">
+          <div class="card-bg" style="background-image:url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=900&q=85');"></div>
+          <div class="card-accent"></div><div class="card-grad"></div>
+          <div class="card-play-btn glass-btn">
+            <svg width="18" height="20" viewBox="0 0 18 20" fill="none"><path d="M2 2L16 10L2 18V2Z" fill="white" stroke="white" stroke-width="1.5" stroke-linejoin="round"/></svg>
+          </div>
+          <div class="card-caption"><div class="card-label">03 · Stream</div><div class="card-title">Con Suối Rừng</div><div class="card-rule"></div></div>
+        </div>
+      </div>
+
+      <!-- BLOCK 3: single mid -->
+      <div class="card w-mid h-mid nudge-down2"
+           data-src="rung1.mp4" data-label="04 · Canopy" data-title="Tán Cây Xanh">
+        <div class="card-bg" style="background-image:url('https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=1000&q=85');"></div>
+        <div class="card-accent"></div><div class="card-grad"></div>
+        <div class="card-play-btn glass-btn">
+          <svg width="18" height="20" viewBox="0 0 18 20" fill="none"><path d="M2 2L16 10L2 18V2Z" fill="white" stroke="white" stroke-width="1.5" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="card-caption"><div class="card-label">04 · Canopy</div><div class="card-title">Tán Cây Xanh</div><div class="card-rule"></div></div>
+      </div>
+
+      <!-- TEXT 1 -->
+      <div class="text-panel nudge-up2">
+        <div class="text-num">01</div>
+        <h2 class="text-heading">Thiên Nhiên<br><em>Hoang Dã</em></h2>
+        <p class="text-body">Những khoảnh khắc tĩnh lặng giữa lòng rừng già — nơi tiếng mưa hòa với tiếng chim.</p>
+        <span class="text-tag">Rừng &amp; Mưa</span>
+      </div>
+
+      <!-- BLOCK 4: stack wide — tall + short -->
+      <div class="stack nudge-neg">
+        <div class="card w-wide h-short"
+             data-src="rung1.mp4" data-label="05 · Birds" data-title="Chim Chóc Bay">
+          <div class="card-bg" style="background-image:url('https://images.unsplash.com/photo-1444464666168-49d633b86797?auto=format&fit=crop&w=1000&q=85');"></div>
+          <div class="card-accent"></div><div class="card-grad"></div>
+          <div class="card-play-btn glass-btn">
+            <svg width="18" height="20" viewBox="0 0 18 20" fill="none"><path d="M2 2L16 10L2 18V2Z" fill="white" stroke="white" stroke-width="1.5" stroke-linejoin="round"/></svg>
+          </div>
+          <div class="card-caption"><div class="card-label">05 · Birds</div><div class="card-title">Chim Chóc Bay</div><div class="card-rule"></div></div>
+        </div>
+        <div class="card w-wide h-tall"
+             data-src="rung1.mp4" data-label="06 · Mist" data-title="Rừng Sương Mờ">
+          <div class="card-bg" style="background-image:url('https://images.unsplash.com/photo-1542401886-65d6c61db217?auto=format&fit=crop&w=1000&q=85');"></div>
+          <div class="card-accent"></div><div class="card-grad"></div>
+          <div class="card-play-btn glass-btn">
+            <svg width="18" height="20" viewBox="0 0 18 20" fill="none"><path d="M2 2L16 10L2 18V2Z" fill="white" stroke="white" stroke-width="1.5" stroke-linejoin="round"/></svg>
+          </div>
+          <div class="card-caption"><div class="card-label">06 · Mist</div><div class="card-title">Rừng Sương Mờ</div><div class="card-rule"></div></div>
+        </div>
+      </div>
+
+      <!-- BLOCK 5: single slim very tall -->
+      <div class="card w-slim h-hero nudge-down"
+           data-src="rung1.mp4" data-label="07 · Waterfall" data-title="Thác Nước Rừng">
+        <div class="card-bg" style="background-image:url('https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?auto=format&fit=crop&w=900&q=85');"></div>
+        <div class="card-accent"></div><div class="card-grad"></div>
+        <div class="card-play-btn glass-btn">
+          <svg width="18" height="20" viewBox="0 0 18 20" fill="none"><path d="M2 2L16 10L2 18V2Z" fill="white" stroke="white" stroke-width="1.5" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="card-caption"><div class="card-label">07 · Waterfall</div><div class="card-title">Thác Nước Rừng</div><div class="card-rule"></div></div>
+      </div>
+
+      <!-- TEXT 2 -->
+      <div class="text-panel nudge-mid">
+        <div class="text-num">02</div>
+        <h2 class="text-heading">Ánh Sáng &amp;<br><em>Tán Cây</em></h2>
+        <p class="text-body">Ánh nắng chiều lọc qua tán rừng, tạo thành những vệt sáng vàng ấm giữa bóng xanh.</p>
+        <span class="text-tag">Ánh Sáng &amp; Bóng</span>
+      </div>
+
+      <!-- BLOCK 6: triple stack — 3 mini cards -->
+      <div class="stack nudge-up">
+        <div class="card w-xs h-xs"
+             data-src="rung1.mp4" data-label="08 · Rain" data-title="Mưa Chiều">
+          <div class="card-bg" style="background-image:url('https://images.unsplash.com/photo-1519692933481-e162a57d6721?auto=format&fit=crop&w=700&q=85');"></div>
+          <div class="card-accent"></div><div class="card-grad"></div>
+          <div class="card-play-btn glass-btn">
+            <svg width="12" height="14" viewBox="0 0 18 20" fill="none"><path d="M2 2L16 10L2 18V2Z" fill="white" stroke="white" stroke-width="1.5" stroke-linejoin="round"/></svg>
+          </div>
+          <div class="card-caption"><div class="card-label">08 · Rain</div><div class="card-title">Mưa Chiều</div><div class="card-rule"></div></div>
+        </div>
+        <div class="card w-xs h-mid"
+             data-src="rung1.mp4" data-label="09 · Green" data-title="Cỏ Xanh Mát">
+          <div class="card-bg" style="background-image:url('https://images.unsplash.com/photo-1446329813274-7c9036bd9a1f?auto=format&fit=crop&w=700&q=85');"></div>
+          <div class="card-accent"></div><div class="card-grad"></div>
+          <div class="card-play-btn glass-btn">
+            <svg width="14" height="16" viewBox="0 0 18 20" fill="none"><path d="M2 2L16 10L2 18V2Z" fill="white" stroke="white" stroke-width="1.5" stroke-linejoin="round"/></svg>
+          </div>
+          <div class="card-caption"><div class="card-label">09 · Green</div><div class="card-title">Cỏ Xanh Mát</div><div class="card-rule"></div></div>
+        </div>
+      </div>
+
+      <!-- BLOCK 7: wide tall -->
+      <div class="card w-wide h-tall nudge-up2"
+           data-src="rung1.mp4" data-label="10 · Summit" data-title="Đỉnh Núi Mờ Sương">
+        <div class="card-bg" style="background-image:url('https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1200&q=85');"></div>
+        <div class="card-accent"></div><div class="card-grad"></div>
+        <div class="card-play-btn glass-btn">
+          <svg width="18" height="20" viewBox="0 0 18 20" fill="none"><path d="M2 2L16 10L2 18V2Z" fill="white" stroke="white" stroke-width="1.5" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="card-caption"><div class="card-label">10 · Summit</div><div class="card-title">Đỉnh Núi Mờ Sương</div><div class="card-rule"></div></div>
+      </div>
+
+      <!-- BLOCK 8: stack two landscape style -->
+      <div class="stack nudge-down">
+        <div class="card w-mid h-short"
+             data-src="rung1.mp4" data-label="11 · Ocean" data-title="Biển Xanh Vô Tận">
+          <div class="card-bg" style="background-image:url('https://images.unsplash.com/photo-1505118380757-91f5f5632de0?auto=format&fit=crop&w=1000&q=85');"></div>
+          <div class="card-accent"></div><div class="card-grad"></div>
+          <div class="card-play-btn glass-btn">
+            <svg width="18" height="20" viewBox="0 0 18 20" fill="none"><path d="M2 2L16 10L2 18V2Z" fill="white" stroke="white" stroke-width="1.5" stroke-linejoin="round"/></svg>
+          </div>
+          <div class="card-caption"><div class="card-label">11 · Ocean</div><div class="card-title">Biển Xanh Vô Tận</div><div class="card-rule"></div></div>
+        </div>
+        <div class="card w-mid h-mid"
+             data-src="rung1.mp4" data-label="12 · Desert" data-title="Sa Mạc Vàng">
+          <div class="card-bg" style="background-image:url('https://images.unsplash.com/photo-1509316785289-025f5b846b35?auto=format&fit=crop&w=1000&q=85');"></div>
+          <div class="card-accent"></div><div class="card-grad"></div>
+          <div class="card-play-btn glass-btn">
+            <svg width="18" height="20" viewBox="0 0 18 20" fill="none"><path d="M2 2L16 10L2 18V2Z" fill="white" stroke="white" stroke-width="1.5" stroke-linejoin="round"/></svg>
+          </div>
+          <div class="card-caption"><div class="card-label">12 · Desert</div><div class="card-title">Sa Mạc Vàng</div><div class="card-rule"></div></div>
+        </div>
+      </div>
+
+      <!-- TEXT 3 -->
+      <div class="text-panel nudge-up">
+        <div class="text-num">03</div>
+        <h2 class="text-heading">Nước &amp;<br><em>Tĩnh Lặng</em></h2>
+        <p class="text-body">Con suối chảy qua rừng già, tiếng nước hòa nhịp thở của thiên nhiên.</p>
+        <span class="text-tag">Suối &amp; Thác</span>
+      </div>
+
+      <!-- BLOCK 9: single narrow mid nudge -->
+      <div class="card w-narrow h-mid nudge-down2"
+           data-src="rung1.mp4" data-label="13 · Cave" data-title="Hang Động Huyền Bí">
+        <div class="card-bg" style="background-image:url('https://images.unsplash.com/photo-1495211776-b9e87b04b57e?auto=format&fit=crop&w=900&q=85');"></div>
+        <div class="card-accent"></div><div class="card-grad"></div>
+        <div class="card-play-btn glass-btn">
+          <svg width="18" height="20" viewBox="0 0 18 20" fill="none"><path d="M2 2L16 10L2 18V2Z" fill="white" stroke="white" stroke-width="1.5" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="card-caption"><div class="card-label">13 · Cave</div><div class="card-title">Hang Động Huyền Bí</div><div class="card-rule"></div></div>
+      </div>
+
+      <!-- BLOCK 10: stack 3 xs cards vertical -->
+      <div class="stack nudge-up">
+        <div class="card w-slim h-xs"
+             data-src="rung1.mp4" data-label="14 · Frost" data-title="Băng Tuyết Trắng">
+          <div class="card-bg" style="background-image:url('https://images.unsplash.com/photo-1491002052546-bf38f186af56?auto=format&fit=crop&w=700&q=85');"></div>
+          <div class="card-accent"></div><div class="card-grad"></div>
+          <div class="card-play-btn glass-btn">
+            <svg width="12" height="14" viewBox="0 0 18 20" fill="none"><path d="M2 2L16 10L2 18V2Z" fill="white" stroke="white" stroke-width="1.5" stroke-linejoin="round"/></svg>
+          </div>
+          <div class="card-caption"><div class="card-label">14 · Frost</div><div class="card-title">Băng Tuyết</div><div class="card-rule"></div></div>
+        </div>
+        <div class="card w-slim h-short"
+             data-src="rung1.mp4" data-label="15 · Meadow" data-title="Đồng Cỏ Xanh">
+          <div class="card-bg" style="background-image:url('https://images.unsplash.com/photo-1440964829947-ca3277bd37f8?auto=format&fit=crop&w=700&q=85');"></div>
+          <div class="card-accent"></div><div class="card-grad"></div>
+          <div class="card-play-btn glass-btn">
+            <svg width="14" height="16" viewBox="0 0 18 20" fill="none"><path d="M2 2L16 10L2 18V2Z" fill="white" stroke="white" stroke-width="1.5" stroke-linejoin="round"/></svg>
+          </div>
+          <div class="card-caption"><div class="card-label">15 · Meadow</div><div class="card-title">Đồng Cỏ Xanh</div><div class="card-rule"></div></div>
+        </div>
+        <div class="card w-slim h-xs"
+             data-src="rung1.mp4" data-label="16 · Dusk" data-title="Hoàng Hôn Tím">
+          <div class="card-bg" style="background-image:url('https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=format&fit=crop&w=700&q=85');"></div>
+          <div class="card-accent"></div><div class="card-grad"></div>
+          <div class="card-play-btn glass-btn">
+            <svg width="12" height="14" viewBox="0 0 18 20" fill="none"><path d="M2 2L16 10L2 18V2Z" fill="white" stroke="white" stroke-width="1.5" stroke-linejoin="round"/></svg>
+          </div>
+          <div class="card-caption"><div class="card-label">16 · Dusk</div><div class="card-title">Hoàng Hôn Tím</div><div class="card-rule"></div></div>
+        </div>
+      </div>
+
+      <!-- BLOCK 11: final hero -->
+      <div class="card w-hero h-tall nudge-down2"
+           data-src="rung1.mp4" data-label="17 · Aurora" data-title="Cực Quang Bắc">
+        <div class="card-bg" style="background-image:url('https://images.unsplash.com/photo-1531366936337-7c912a4589a7?auto=format&fit=crop&w=1400&q=85');"></div>
+        <div class="card-accent"></div><div class="card-grad"></div>
+        <div class="card-play-btn glass-btn">
+          <svg width="18" height="20" viewBox="0 0 18 20" fill="none"><path d="M2 2L16 10L2 18V2Z" fill="white" stroke="white" stroke-width="1.5" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="card-caption"><div class="card-label">17 · Aurora</div><div class="card-title">Cực Quang Bắc</div><div class="card-rule"></div></div>
+      </div>
+
+      <!-- END -->
+      <div class="end-panel">
+        <p class="end-quote">"Leave space<br>for the<br>wilderness."</p>
+        <span class="end-attr">— Nature Gallery</span>
+        <button class="end-back glass-btn" id="back-to-start">
+          <svg width="22" height="8" viewBox="0 0 22 8" fill="none">
+            <path d="M22 4H0M6 0L0 4L6 8" stroke="currentColor" stroke-width="1"/>
+          </svg>
+          quay lại đầu
+        </button>
+      </div>
+
+    </div><!-- /strip -->
+  </div><!-- /viewport -->
+</div><!-- /gallery -->
+
+
+<!-- ════ FULLSCREEN PLAYER (local video) ════ -->
+<div id="player">
+
+  <!-- Native video element -->
+  <video id="vid-player"
+    src=""
+    autoplay
+    controls
+    loop
+    playsinline
+    style="
+      position:absolute;inset:0;
+      width:100%;height:100%;
+      object-fit:contain;
+      background:#000;
+    ">
+  </video>
+
+  <!-- TOP BAR -->
+  <div id="player-topbar">
+    <button class="player-back glass-btn" id="player-back-btn">
+      <svg width="18" height="8" viewBox="0 0 18 8" fill="none">
+        <path d="M18 4H0M6 0L0 4L6 8" stroke="currentColor" stroke-width="1.2"/>
+      </svg>
+      Back to Gallery
+    </button>
+
+    <div class="player-title-wrap">
+      <div class="player-label" id="player-label-el"></div>
+      <div class="player-title" id="player-title-el"></div>
+    </div>
+
+    <button class="focus-toggle glass-btn" id="focus-mode-btn" title="Toggle Focus Mode">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M8 3H5a2 2 0 0 0-2 2v3"/>
+        <path d="M21 8V5a2 2 0 0 0-2-2h-3"/>
+        <path d="M16 21h3a2 2 0 0 0 2-2v-3"/>
+        <path d="M3 16v3a2 2 0 0 0 2 2h3"/>
+      </svg>
+      Focus
+    </button>
+  </div>
+
+</div><!-- /player -->
+
+
+<script>
+// ══════════════════════════════════════════════════
+//  GALLERY — horizontal scroll engine
+// ══════════════════════════════════════════════════
+const gallery  = document.getElementById('gallery');
+const strip    = document.getElementById('strip');
+const progress = document.getElementById('progress');
+const hint     = document.getElementById('hint');
+
+let targetX = 0, currentX = 0, maxScroll = 0;
+let isDragging = false, dragStartX = 0, dragStartScroll = 0;
+const clamp = (v,lo,hi)=>Math.max(lo,Math.min(hi,v));
+const lerp  = (a,b,t) =>a+(b-a)*t;
+
+function tick() {
+  if (isDragging) {
+    currentX = lerp(currentX, targetX, 0.65);
+  } else {
+    currentX = lerp(currentX, targetX, 0.09);
+    if (Math.abs(currentX-targetX)<0.04) currentX=targetX;
+  }
+  strip.style.transform = `translate3d(${-currentX}px,0,0)`;
+  const pct = maxScroll>0?(currentX/maxScroll)*100:0;
+  progress.style.width = pct+'%';
+  hint.style.opacity = currentX>60?'0':'';
+  requestAnimationFrame(tick);
+}
+
+window.addEventListener('wheel',(e)=>{
+  if(playerOpen) return;
+  e.preventDefault();
+  targetX=clamp(targetX+(e.deltaY||e.deltaX)*1.25,0,maxScroll);
+},{passive:false});
+
+let touchStartX=0, touchStartScroll=0;
+window.addEventListener('touchstart',(e)=>{
+  if(playerOpen) return;
+  touchStartX=e.touches[0].clientX; touchStartScroll=targetX;
+},{passive:true});
+window.addEventListener('touchmove',(e)=>{
+  if(playerOpen) return;
+  targetX=clamp(touchStartScroll+(touchStartX-e.touches[0].clientX)*1.5,0,maxScroll);
+},{passive:true});
+
+const viewport = document.getElementById('viewport');
+let mouseDownX = 0;
+window.addEventListener('mousedown',(e)=>{
+  if(playerOpen) return;
+  isDragging=true; dragStartX=e.clientX; mouseDownX=e.clientX; dragStartScroll=targetX;
+  viewport.classList.add('dragging');
+});
+window.addEventListener('mouseup',()=>{ isDragging=false; viewport.classList.remove('dragging'); });
+window.addEventListener('mouseleave',()=>{ isDragging=false; viewport.classList.remove('dragging'); });
+window.addEventListener('mousemove',(e)=>{
+  if(!isDragging||playerOpen) return;
+  targetX=clamp(dragStartScroll+(dragStartX-e.clientX),0,maxScroll);
+});
+
+window.addEventListener('keydown',(e)=>{
+  if(playerOpen) {
+    if(e.key==='Escape') closePlayer();
+    return;
+  }
+  const step=window.innerWidth*0.55;
+  if(e.key==='ArrowRight'||e.key==='ArrowDown') targetX=clamp(targetX+step,0,maxScroll);
+  if(e.key==='ArrowLeft' ||e.key==='ArrowUp')   targetX=clamp(targetX-step,0,maxScroll);
+});
+
+window.addEventListener('resize',()=>{
+  maxScroll=strip.scrollWidth-window.innerWidth;
+  targetX=clamp(targetX,0,maxScroll);
+});
+
+window.addEventListener('load',()=>{
+  maxScroll=strip.scrollWidth-window.innerWidth;
+  tick();
+});
+
+document.getElementById('back-to-start').addEventListener('click',()=>{ targetX=0; });
+
+// ══════════════════════════════════════════════════
+//  FULLSCREEN PLAYER — local video
+// ══════════════════════════════════════════════════
+const player   = document.getElementById('player');
+const vidEl    = document.getElementById('vid-player');
+const topbar   = document.getElementById('player-topbar');
+const backBtn  = document.getElementById('player-back-btn');
+
+let playerOpen = false;
+
+// Focus mode state (declared early so closePlayer can reference)
+const focusBtn = document.getElementById('focus-mode-btn');
+let focusMode = false;
+let focusTimeout = null;
+
+function openPlayer(src, label, title) {
+  vidEl.src = src;
+  vidEl.play().catch(()=>{});
+  document.getElementById('player-label-el').textContent = label;
+  document.getElementById('player-title-el').textContent  = title;
+  gallery.classList.add('hidden');
+  player.classList.add('open');
+  playerOpen = true;
+}
+
+function closePlayer() {
+  vidEl.pause();
+  vidEl.src = ''; // release file
+  // Reset focus mode
+  focusMode = false;
+  player.classList.remove('focus-mode', 'reveal-controls');
+  vidEl.controls = true;
+  focusBtn.classList.remove('active');
+  clearTimeout(focusTimeout);
+
+  player.classList.remove('open');
+  gallery.classList.remove('hidden');
+  playerOpen = false;
+}
+
+backBtn.addEventListener('click', closePlayer);
+
+// ── Focus Mode ──
+
+function toggleFocus() {
+  focusMode = !focusMode;
+  focusBtn.classList.toggle('active', focusMode);
+  player.classList.toggle('focus-mode', focusMode);
+  // When entering focus mode, hide native controls
+  vidEl.controls = !focusMode;
+  if (focusMode) {
+    // Briefly show controls then hide
+    player.classList.add('reveal-controls');
+    clearTimeout(focusTimeout);
+    focusTimeout = setTimeout(() => {
+      player.classList.remove('reveal-controls');
+    }, 1200);
+  }
+}
+
+focusBtn.addEventListener('click', (e) => {
+  e.stopPropagation();
+  toggleFocus();
+});
+
+// Reveal controls on mouse move in focus mode
+player.addEventListener('mousemove', () => {
+  if (!focusMode) return;
+  player.classList.add('reveal-controls');
+  clearTimeout(focusTimeout);
+  focusTimeout = setTimeout(() => {
+    player.classList.remove('reveal-controls');
+  }, 2500);
+});
+
+// Exit focus mode on Escape or double-click
+player.addEventListener('dblclick', () => {
+  if (focusMode) toggleFocus();
+});
+
+// Wire up all cards with data-src
+document.querySelectorAll('[data-src]').forEach((card)=>{
+  card.addEventListener('click',(e)=>{
+    if(Math.abs(mouseDownX - e.clientX) > 8) return;
+    openPlayer(
+      card.dataset.src,
+      card.dataset.label || '',
+      card.dataset.title || ''
+    );
+  });
+});
+
+console.log('[Gallery] Cards:', document.querySelectorAll('[data-src]').length,
+            '| Glass btns:', document.querySelectorAll('.glass-btn').length);
+</script>
+</body>
+</html>
