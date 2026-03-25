@@ -7,13 +7,23 @@
   <meta name="description"
     content="Cuộc hành trình qua những cảnh quan thiên nhiên hoang dã — rừng già, thác nước, bầu trời." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
-    href="https://fonts.googleapis.com/css2?family=Pinyon+Script&family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&family=Raleway:wght@300;400;500;600&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;0,6..96,600;1,6..96,400&family=Pinyon+Script&family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&family=Raleway:wght@300;400;500;600&display=swap"
     rel="stylesheet" />
   <style>
     @font-face {
       font-family: 'TP LE MAJOR';
-      src: local('TP LE MAJOR'), local('TP-LE-MAJOR');
+      src: local('TP LE MAJOR'), local('TP-LE-MAJOR'), local('TP Le Major'),
+           url('TP Le Major.ttf') format('truetype');
+      font-display: swap;
+    }
+
+    @font-face {
+      font-family: '1FTV Nillota';
+      src: local('1FTV Nillota'), local('1FTV-Nillota'),
+           url('1FTV-Nillota.ttf') format('truetype');
+      font-display: swap;
     }
 
     *,
@@ -46,7 +56,7 @@
       height: 100%;
       overflow: hidden;
       background: var(--clr-bg);
-      font-family: 'Raleway', sans-serif;
+      font-family: '1FTV Nillota', 'Raleway', sans-serif;
       color: var(--clr-text);
     }
 
@@ -210,7 +220,7 @@
     }
 
     .card-title {
-      font-family: 'Playfair Display', serif;
+      font-family: '1FTV Nillota', sans-serif;
       font-size: 14px;
       font-weight: 400;
       color: var(--clr-text);
@@ -224,7 +234,7 @@
     /* ── Intro panel ── */
     .intro {
       flex-shrink: 0;
-      width: 580px;
+      width: 720px;
       height: 100vh;
       display: flex;
       flex-direction: column;
@@ -244,12 +254,12 @@
     }
 
     .intro h1 {
-      font-family: 'Pinyon Script', cursive;
-      font-size: clamp(3rem, 5vw, 5.5rem);
+      font-family: 'TP LE MAJOR', 'Bodoni Moda', 'Playfair Display', serif;
+      font-size: clamp(2.8rem, 4.5vw, 4.8rem);
       font-weight: 400;
       color: #E3EF26;
-      line-height: 1.0;
-      text-align: center;
+      line-height: 1.05;
+      text-align: left;
       white-space: nowrap;
       opacity: 0;
       animation: fadeUp 0.8s ease 0.35s forwards;
@@ -329,7 +339,7 @@
     }
 
     .text-heading {
-      font-family: 'Playfair Display', serif;
+      font-family: '1FTV Nillota', sans-serif;
       font-size: 1.35rem;
       font-weight: 400;
       line-height: 1.25;
@@ -367,7 +377,7 @@
     }
 
     .end-quote {
-      font-family: 'Playfair Display', serif;
+      font-family: '1FTV Nillota', sans-serif;
       font-size: 1.85rem;
       font-style: italic;
       color: var(--clr-text);
@@ -398,7 +408,7 @@
       border: 1px solid rgba(255, 255, 255, 0.2);
       background: transparent;
       transition: all 0.3s;
-      font-family: 'Raleway', sans-serif;
+      font-family: '1FTV Nillota', sans-serif;
     }
 
     .end-back:hover {
@@ -480,7 +490,7 @@
     }
 
     #drag-hint .drag-text {
-      font-family: 'Raleway', sans-serif;
+      font-family: '1FTV Nillota', sans-serif;
       font-size: 9px;
       font-weight: 600;
       color: #fff;
@@ -589,7 +599,7 @@
       letter-spacing: 0.01em;
       color: rgba(255, 255, 255, 0.85);
       transition: all 0.25s;
-      font-family: 'Raleway', sans-serif;
+      font-family: '1FTV Nillota', sans-serif;
     }
 
     .player-back:hover {
@@ -622,7 +632,7 @@
     }
 
     .player-title {
-      font-family: 'Playfair Display', serif;
+      font-family: '1FTV Nillota', sans-serif;
       font-size: clamp(16px, 1.6vw, 22px);
       font-weight: 400;
       color: #fff;
@@ -645,7 +655,7 @@
       -webkit-backdrop-filter: blur(12px);
       backdrop-filter: blur(12px);
       transition: all 0.3s ease;
-      font-family: 'Raleway', sans-serif;
+      font-family: '1FTV Nillota', sans-serif;
     }
 
     .focus-toggle:hover {
@@ -679,28 +689,6 @@
 
     #player.focus-mode video {
       cursor: none;
-    }
-
-    #player.focus-mode iframe {
-      cursor: none;
-    }
-
-    /* Hide YouTube controls overlay in focus mode */
-    #player.focus-mode #vid-player-container {
-      position: relative;
-    }
-
-    #player.focus-mode #vid-player-container::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: none;
-      z-index: 5;
-      cursor: none;
-      pointer-events: none;
     }
 
     #player.focus-mode.reveal-controls #player-topbar {
@@ -805,7 +793,7 @@
           <div class="intro-ring">
             <svg viewBox="0 0 100 100" fill="none">
               <path id="rp" d="M50,50 m-36,0 a36,36 0 1,1 72,0 a36,36 0 1,1 -72,0" fill="none" />
-              <text font-size="9" fill="#FFFFFF" font-family="Raleway,sans-serif" letter-spacing="2.8">
+              <text font-size="9" fill="#FFFFFF" font-family="1FTV Nillota,sans-serif" letter-spacing="2.8">
                 <!-- //<textPath href="#rp">NATURE · FOREST · RAIN · WILD ·</textPath> -->
               </text>
               <circle cx="50" cy="50" r="3" fill="#FFFFFF" />
@@ -1273,12 +1261,8 @@
       console.log(`🎬 Opening player: "${title}" (${label})`);
       console.log(`📹 YouTube Video ID: ${videoId}`);
       
-      // Build YouTube embed URL with optimal parameters
-      // fs=1: enable fullscreen button
-      // autoplay=1: auto play
-      // rel=0: no recommended videos
-      // modestbranding=1: minimal YouTube branding
-      const embedUrl = `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&fs=1&modestbranding=1&playsinline=1`;
+      // Build YouTube embed URL with autoplay
+      const embedUrl = `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0`;
       vidEl.src = embedUrl;
       
       document.getElementById('player-label-el').textContent = label;
@@ -1287,8 +1271,6 @@
       player.classList.add('open');
       playerOpen = true;
       dragHint.classList.add('player-open');
-      
-      console.log('✅ Player opened - Use Focus Mode (Fn+F) for immersive viewing');
     }
 
     function showPlayerError(title, details) {
@@ -1297,7 +1279,7 @@
 
       const msg = document.createElement('div');
       msg.id = 'video-error-msg';
-      msg.style.cssText = 'position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#fff;font-family:Raleway,sans-serif;z-index:10;background:rgba(0,0,0,0.95);padding:20px;overflow-y:auto;';
+      msg.style.cssText = 'position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#fff;font-family:1FTV Nillota,sans-serif;z-index:10;background:rgba(0,0,0,0.95);padding:20px;overflow-y:auto;';
       msg.innerHTML = `
     <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#C4A97D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom:16px;">
       <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>
@@ -1361,25 +1343,6 @@
       if (focusMode) toggleFocus();
     });
 
-    // Keyboard shortcuts
-    document.addEventListener('keydown', (e) => {
-      if (!playerOpen) return;
-      
-      // 'F' key: Toggle Focus Mode
-      if (e.key.toLowerCase() === 'f') {
-        e.preventDefault();
-        toggleFocus();
-        console.log('🎯 Focus Mode toggled');
-      }
-      
-      // 'Escape' key: Close player and back to library
-      if (e.key === 'Escape') {
-        e.preventDefault();
-        closePlayer();
-        console.log('← Back to Library');
-      }
-    });
-
     // Wire up all cards with data-src
     document.querySelectorAll('[data-src]').forEach((card, idx) => {
       card.addEventListener('click', (e) => {
@@ -1394,12 +1357,8 @@
 
     const totalCards = document.querySelectorAll('[data-src]').length;
     console.log(`✅ Gallery ready! ${totalCards} cards loaded`);
-    console.log('%c🎬 PLAYER FEATURES:', 'color:#E3EF26;font-size:14px;font-weight:bold;');
-    console.log('%c→ Click any card to open video', 'color:#E8F0E8;');
-    console.log('%c→ Press "F" to toggle Focus Mode (minimal UI for concentration)', 'color:#E8F0E8;');
-    console.log('%c→ Press "Esc" or click "Back to Library" to return to gallery', 'color:#E8F0E8;');
-    console.log('%c→ Click fullscreen button on video player for HD/4K viewing', 'color:#E8F0E8;');
-    console.log('%c→ Mouse over video when in Focus Mode to show back button', 'color:#E8F0E8;');
+    console.log('💡 TIP: Mở DevTools (F12) → Console để theo dõi video loading');
+    console.log('📺 Dùng YouTube video URL hoặc video ID (ví dụ: dQw4w9WgXcQ)');
   </script>
 </body>
 
