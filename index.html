@@ -8,9 +8,14 @@
     content="Cuộc hành trình qua những cảnh quan thiên nhiên hoang dã — rừng già, thác nước, bầu trời." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link
-    href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&family=Raleway:wght@300;400;500;600&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Pinyon+Script&family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&family=Raleway:wght@300;400;500;600&display=swap"
     rel="stylesheet" />
   <style>
+    @font-face {
+      font-family: 'TP LE MAJOR';
+      src: local('TP LE MAJOR'), local('TP-LE-MAJOR');
+    }
+
     *,
     *::before,
     *::after {
@@ -29,7 +34,7 @@
       --clr-bg: #0A2B24;
       --clr-bg2: #0C342C;
       --clr-mid: #076653;
-      --clr-accent: #E3EF26;
+      --clr-accent: #FFFFFF;
       --clr-text: #E8F0E8;
       --clr-text-sub: rgba(232, 240, 232, 0.45);
       --clr-card-shadow: rgba(0, 0, 0, 0.35);
@@ -111,13 +116,13 @@
       box-shadow: 0 4px 20px var(--clr-card-shadow),
         0 1px 3px rgba(0, 0, 0, 0.2);
       background: rgba(7, 102, 83, 0.3);
-      border-radius: 2px;
+      border-radius: 16px;
     }
 
     .card:hover {
       transform: translateY(-8px) scale(1.02) !important;
       box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4),
-        0 8px 20px rgba(227, 239, 38, 0.08);
+        0 8px 20px rgba(255, 255, 255, 0.08);
       z-index: 10;
     }
 
@@ -157,7 +162,7 @@
       align-items: center;
       justify-content: center;
       background: rgba(10, 43, 36, 0.85);
-      border: 1px solid rgba(227, 239, 38, 0.4);
+      border: 1px solid rgba(255, 255, 255, 0.4);
       box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
       transition: transform 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94),
         opacity 0.35s ease;
@@ -184,8 +189,8 @@
       z-index: 4;
       padding: 8px;
       background: rgba(10, 43, 36, 0.92);
-      border-radius: 2px;
-      border: 1px solid rgba(227, 239, 38, 0.15);
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.15);
       transform: translateY(4px);
       opacity: 0;
       transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.4s;
@@ -219,12 +224,12 @@
     /* ── Intro panel ── */
     .intro {
       flex-shrink: 0;
-      width: 420px;
+      width: 580px;
       height: 100vh;
       display: flex;
       flex-direction: column;
       justify-content: center;
-      padding: 48px 52px;
+      padding: 48px 60px;
       position: relative;
     }
 
@@ -239,26 +244,28 @@
     }
 
     .intro h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(2.2rem, 3.5vw, 3.8rem);
+      font-family: 'Pinyon Script', cursive;
+      font-size: clamp(3rem, 5vw, 5.5rem);
       font-weight: 400;
-      color: var(--clr-text);
+      color: #E3EF26;
       line-height: 1.0;
       text-align: center;
       white-space: nowrap;
       opacity: 0;
       animation: fadeUp 0.8s ease 0.35s forwards;
+      text-shadow: 0 2px 12px rgba(227, 239, 38, 0.25), 0 0 40px rgba(227, 239, 38, 0.1);
+      letter-spacing: 0.02em;
     }
 
     .intro h1 em {
-      color: var(--clr-accent);
+      color: #E3EF26;
       font-style: italic;
     }
 
     .intro-line {
       width: 0;
       height: 1px;
-      background: rgba(227, 239, 38, 0.25);
+      background: rgba(255, 255, 255, 0.25);
       margin: 22px 0;
       animation: growLine 0.8s ease 0.75s forwards;
     }
@@ -330,7 +337,7 @@
 
     .text-heading em {
       font-style: italic;
-      color: var(--clr-accent);
+      color: #FFFFFF;
     }
 
     .text-body {
@@ -344,7 +351,7 @@
       font-size: 8.5px;
       letter-spacing: 0.2em;
       text-transform: uppercase;
-      color: rgba(227, 239, 38, 0.3);
+      color: rgba(255, 255, 255, 0.3);
     }
 
     /* ── End panel ── */
@@ -388,7 +395,7 @@
       cursor: pointer;
       padding: 12px 24px;
       border-radius: 24px;
-      border: 1px solid rgba(227, 239, 38, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.2);
       background: transparent;
       transition: all 0.3s;
       font-family: 'Raleway', sans-serif;
@@ -423,7 +430,7 @@
       font-size: 9px;
       letter-spacing: 0.22em;
       text-transform: uppercase;
-      color: rgba(227, 239, 38, 0.22);
+      color: rgba(255, 255, 255, 0.22);
       pointer-events: none;
       opacity: 0;
       animation: fadeIn 1s ease 2s forwards;
@@ -439,7 +446,7 @@
       height: 80px;
       border-radius: 50%;
       background: rgba(7, 102, 83, 0.9);
-      border: 1px solid rgba(227, 239, 38, 0.3);
+      border: 1px solid rgba(255, 255, 255, 0.3);
       box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
       display: flex;
       flex-direction: column;
@@ -455,8 +462,8 @@
     #drag-hint.dragging {
       width: 55px;
       height: 55px;
-      background: rgba(227, 239, 38, 0.85);
-      box-shadow: 0 4px 20px rgba(227, 239, 38, 0.3);
+      background: rgba(255, 255, 255, 0.85);
+      box-shadow: 0 4px 20px rgba(255, 255, 255, 0.3);
     }
 
     #drag-hint.dragging .drag-text {
@@ -674,6 +681,28 @@
       cursor: none;
     }
 
+    #player.focus-mode iframe {
+      cursor: none;
+    }
+
+    /* Hide YouTube controls overlay in focus mode */
+    #player.focus-mode #vid-player-container {
+      position: relative;
+    }
+
+    #player.focus-mode #vid-player-container::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: none;
+      z-index: 5;
+      cursor: none;
+      pointer-events: none;
+    }
+
     #player.focus-mode.reveal-controls #player-topbar {
       opacity: 1;
       pointer-events: auto;
@@ -776,10 +805,10 @@
           <div class="intro-ring">
             <svg viewBox="0 0 100 100" fill="none">
               <path id="rp" d="M50,50 m-36,0 a36,36 0 1,1 72,0 a36,36 0 1,1 -72,0" fill="none" />
-              <text font-size="9" fill="#E3EF26" font-family="Raleway,sans-serif" letter-spacing="2.8">
-                <textPath href="#rp">NATURE · FOREST · RAIN · WILD ·</textPath>
+              <text font-size="9" fill="#FFFFFF" font-family="Raleway,sans-serif" letter-spacing="2.8">
+                <!-- //<textPath href="#rp">NATURE · FOREST · RAIN · WILD ·</textPath> -->
               </text>
-              <circle cx="50" cy="50" r="3" fill="#E3EF26" />
+              <circle cx="50" cy="50" r="3" fill="#FFFFFF" />
             </svg>
           </div>
           <div class="intro-arrow">
@@ -790,78 +819,78 @@
           </div>
         </div>
 
-        <!-- GROUP 1: One large card, offset high -->
+        <!-- GROUP 1: Rừng sương mù — large hero card -->
         <div class="scatter-group" style="width:380px; padding-top:8vh;">
-          <div class="card" style="width:350px; height:55vh; transform:rotate(-1.2deg);" data-src="rung1.mp4"
-            data-label="01 · Rừng Già" data-title="Tiếng Mưa Trong Rừng">
+          <div class="card" style="width:350px; height:55vh; transform:rotate(-1.2deg);" data-src="4bHUsy74Fss"
+            data-label="01 · Sương Mù" data-title="Rừng Sương Sớm">
             <div class="card-bg"
-              style="background-image:url('https://images.unsplash.com/photo-1515694346937-94d85e41e6f0?auto=format&fit=crop&w=1200&q=85');">
+              style="background-image:url('https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=1200&q=85');">
             </div>
             <div class="card-play-btn">
               <svg width="16" height="18" viewBox="0 0 18 20" fill="none">
-                <path d="M2 2L16 10L2 18V2Z" fill="#E3EF26" stroke="#E3EF26" stroke-width="1.5"
+                <path d="M2 2L16 10L2 18V2Z" fill="#FFFFFF" stroke="#FFFFFF" stroke-width="1.5"
                   stroke-linejoin="round" />
               </svg>
             </div>
             <div class="card-caption">
-              <div class="card-label">01 · Rừng Già</div>
-              <div class="card-title">Tiếng Mưa Trong Rừng</div>
+              <div class="card-label">01 · Sương Mù</div>
+              <div class="card-title">Rừng Sương Sớm</div>
             </div>
           </div>
         </div>
 
-        <!-- GROUP 2: Two cards stacked, staggered -->
+        <!-- GROUP 2: Suối rừng + Ánh sáng tán cây -->
         <div class="scatter-group" style="width:300px; padding-top:4vh; gap:24px;">
           <div class="card" style="width:200px; height:26vh; transform:rotate(1.5deg); align-self:flex-end;"
-            data-src="rung1.mp4" data-label="02 · Sky" data-title="Bầu Trời Xanh">
+            data-src="4bHUsy74Fss" data-label="02 · Suối" data-title="Suối Trong Rừng">
             <div class="card-bg"
-              style="background-image:url('https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=format&fit=crop&w=900&q=85');">
+              style="background-image:url('https://images.pexels.com/photos/36018089/pexels-photo-36018089.jpeg?auto=compress&cs=tinysrgb&w=900');">
             </div>
             <div class="card-play-btn">
               <svg width="14" height="16" viewBox="0 0 18 20" fill="none">
-                <path d="M2 2L16 10L2 18V2Z" fill="#E3EF26" stroke="#E3EF26" stroke-width="1.5"
+                <path d="M2 2L16 10L2 18V2Z" fill="#FFFFFF" stroke="#FFFFFF" stroke-width="1.5"
                   stroke-linejoin="round" />
               </svg>
             </div>
             <div class="card-caption">
-              <div class="card-label">02 · Sky</div>
-              <div class="card-title">Bầu Trời Xanh</div>
+              <div class="card-label">02 · Suối</div>
+              <div class="card-title">Suối Trong Rừng</div>
             </div>
           </div>
           <div class="card" style="width:270px; height:42vh; transform:rotate(-0.8deg); align-self:flex-start;"
-            data-src="rung1.mp4" data-label="03 · Stream" data-title="Con Suối Rừng">
+            data-src="4bHUsy74Fss" data-label="03 · Tán Cây" data-title="Ánh Sáng Xuyên Lá">
             <div class="card-bg"
-              style="background-image:url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=900&q=85');">
+              style="background-image:url('https://images.pexels.com/photos/6872645/pexels-photo-6872645.jpeg?auto=compress&cs=tinysrgb&w=900');">
             </div>
             <div class="card-play-btn">
               <svg width="16" height="18" viewBox="0 0 18 20" fill="none">
-                <path d="M2 2L16 10L2 18V2Z" fill="#E3EF26" stroke="#E3EF26" stroke-width="1.5"
+                <path d="M2 2L16 10L2 18V2Z" fill="#FFFFFF" stroke="#FFFFFF" stroke-width="1.5"
                   stroke-linejoin="round" />
               </svg>
             </div>
             <div class="card-caption">
-              <div class="card-label">03 · Stream</div>
-              <div class="card-title">Con Suối Rừng</div>
+              <div class="card-label">03 · Tán Cây</div>
+              <div class="card-title">Ánh Sáng Xuyên Lá</div>
             </div>
           </div>
         </div>
 
-        <!-- GROUP 3: Single mid, low position -->
+        <!-- GROUP 3: Thác nước trong rừng -->
         <div class="scatter-group" style="width:340px; padding-top:30vh;">
-          <div class="card" style="width:310px; height:38vh; transform:rotate(0.7deg);" data-src="rung1.mp4"
-            data-label="04 · Canopy" data-title="Tán Cây Xanh">
+          <div class="card" style="width:310px; height:38vh; transform:rotate(0.7deg);" data-src="4bHUsy74Fss"
+            data-label="04 · Thác" data-title="Thác Nước Rừng Già">
             <div class="card-bg"
-              style="background-image:url('https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=1000&q=85');">
+              style="background-image:url('https://images.pexels.com/photos/36280301/pexels-photo-36280301.jpeg?auto=compress&cs=tinysrgb&w=1000');">
             </div>
             <div class="card-play-btn">
               <svg width="16" height="18" viewBox="0 0 18 20" fill="none">
-                <path d="M2 2L16 10L2 18V2Z" fill="#E3EF26" stroke="#E3EF26" stroke-width="1.5"
+                <path d="M2 2L16 10L2 18V2Z" fill="#FFFFFF" stroke="#FFFFFF" stroke-width="1.5"
                   stroke-linejoin="round" />
               </svg>
             </div>
             <div class="card-caption">
-              <div class="card-label">04 · Canopy</div>
-              <div class="card-title">Tán Cây Xanh</div>
+              <div class="card-label">04 · Thác</div>
+              <div class="card-title">Thác Nước Rừng Già</div>
             </div>
           </div>
         </div>
@@ -869,63 +898,63 @@
         <!-- TEXT 1 -->
         <div class="text-panel">
           <div class="text-num">01</div>
-          <h2 class="text-heading">Thiên Nhiên<br><em>Hoang Dã</em></h2>
-          <p class="text-body">Những khoảnh khắc tĩnh lặng giữa lòng rừng già — nơi tiếng mưa hòa với tiếng chim.</p>
-          <span class="text-tag">Rừng &amp; Mưa</span>
+          <h2 class="text-heading">Thiên Nhiên<br><em>Rừng Già</em></h2>
+          <p class="text-body">Những khoảnh khắc tĩnh lặng giữa lòng rừng già — nơi tiếng suối hòa với tiếng chim.</p>
+          <span class="text-tag">Rừng &amp; Suối</span>
         </div>
 
-        <!-- GROUP 4: Two cards, wide + small -->
+        <!-- GROUP 4: Đường mòn rừng + Rêu phong -->
         <div class="scatter-group" style="width:420px; padding-top:6vh; gap:20px;">
-          <div class="card" style="width:380px; height:32vh; transform:rotate(-0.5deg);" data-src="rung1.mp4"
-            data-label="05 · Birds" data-title="Chim Chóc Bay">
+          <div class="card" style="width:380px; height:32vh; transform:rotate(-0.5deg);" data-src="4bHUsy74Fss"
+            data-label="05 · Đường Mòn" data-title="Lối Đi Trong Rừng">
             <div class="card-bg"
-              style="background-image:url('https://images.unsplash.com/photo-1444464666168-49d633b86797?auto=format&fit=crop&w=1000&q=85');">
+              style="background-image:url('https://images.unsplash.com/photo-1502082553048-f009c37129b9?auto=format&fit=crop&w=1000&q=85');">
             </div>
             <div class="card-play-btn">
               <svg width="16" height="18" viewBox="0 0 18 20" fill="none">
-                <path d="M2 2L16 10L2 18V2Z" fill="#E3EF26" stroke="#E3EF26" stroke-width="1.5"
+                <path d="M2 2L16 10L2 18V2Z" fill="#FFFFFF" stroke="#FFFFFF" stroke-width="1.5"
                   stroke-linejoin="round" />
               </svg>
             </div>
             <div class="card-caption">
-              <div class="card-label">05 · Birds</div>
-              <div class="card-title">Chim Chóc Bay</div>
+              <div class="card-label">05 · Đường Mòn</div>
+              <div class="card-title">Lối Đi Trong Rừng</div>
             </div>
           </div>
           <div class="card" style="width:240px; height:36vh; transform:rotate(1.8deg); align-self:flex-end;"
-            data-src="rung1.mp4" data-label="06 · Mist" data-title="Rừng Sương Mờ">
+            data-src="4bHUsy74Fss" data-label="06 · Rêu Phong" data-title="Rừng Rêu Xanh">
             <div class="card-bg"
-              style="background-image:url('https://images.unsplash.com/photo-1542401886-65d6c61db217?auto=format&fit=crop&w=1000&q=85');">
+              style="background-image:url('https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?auto=format&fit=crop&w=1000&q=85');">
             </div>
             <div class="card-play-btn">
               <svg width="16" height="18" viewBox="0 0 18 20" fill="none">
-                <path d="M2 2L16 10L2 18V2Z" fill="#E3EF26" stroke="#E3EF26" stroke-width="1.5"
+                <path d="M2 2L16 10L2 18V2Z" fill="#FFFFFF" stroke="#FFFFFF" stroke-width="1.5"
                   stroke-linejoin="round" />
               </svg>
             </div>
             <div class="card-caption">
-              <div class="card-label">06 · Mist</div>
-              <div class="card-title">Rừng Sương Mờ</div>
+              <div class="card-label">06 · Rêu Phong</div>
+              <div class="card-title">Rừng Rêu Xanh</div>
             </div>
           </div>
         </div>
 
-        <!-- GROUP 5: Tall portrait, high -->
+        <!-- GROUP 5: Mưa rừng — tall portrait -->
         <div class="scatter-group" style="width:240px; padding-top:10vh;">
-          <div class="card" style="width:210px; height:65vh; transform:rotate(-1.5deg);" data-src="rung1.mp4"
-            data-label="07 · Waterfall" data-title="Thác Nước Rừng">
+          <div class="card" style="width:210px; height:65vh; transform:rotate(-1.5deg);" data-src="4bHUsy74Fss"
+            data-label="07 · Mưa Rừng" data-title="Cơn Mưa Giữa Rừng">
             <div class="card-bg"
-              style="background-image:url('https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?auto=format&fit=crop&w=900&q=85');">
+              style="background-image:url('https://images.pexels.com/photos/3939902/pexels-photo-3939902.jpeg?auto=compress&cs=tinysrgb&w=900');">
             </div>
             <div class="card-play-btn">
               <svg width="16" height="18" viewBox="0 0 18 20" fill="none">
-                <path d="M2 2L16 10L2 18V2Z" fill="#E3EF26" stroke="#E3EF26" stroke-width="1.5"
+                <path d="M2 2L16 10L2 18V2Z" fill="#FFFFFF" stroke="#FFFFFF" stroke-width="1.5"
                   stroke-linejoin="round" />
               </svg>
             </div>
             <div class="card-caption">
-              <div class="card-label">07 · Waterfall</div>
-              <div class="card-title">Thác Nước Rừng</div>
+              <div class="card-label">07 · Mưa Rừng</div>
+              <div class="card-title">Cơn Mưa Giữa Rừng</div>
             </div>
           </div>
         </div>
@@ -938,74 +967,58 @@
           <span class="text-tag">Ánh Sáng &amp; Bóng</span>
         </div>
 
-        <!-- GROUP 6: Three small cards, scattered -->
+        <!-- GROUP 6: Rừng tre + Cầu treo rừng -->
         <div class="scatter-group" style="width:350px; padding-top:12vh; gap:18px;">
-          <div class="card" style="width:180px; height:22vh; transform:rotate(2deg); align-self:flex-start;"
-            data-src="rung1.mp4" data-label="08 · Rain" data-title="Mưa Chiều">
+          <div class="card" style="width:280px; height:34vh; transform:rotate(1.2deg); align-self:flex-start;"
+            data-src="4bHUsy74Fss" data-label="08 · Rừng Tre" data-title="Rừng Tre Xanh">
             <div class="card-bg"
-              style="background-image:url('https://images.unsplash.com/photo-1519692933481-e162a57d6721?auto=format&fit=crop&w=700&q=85');">
-            </div>
-            <div class="card-play-btn">
-              <svg width="12" height="14" viewBox="0 0 18 20" fill="none">
-                <path d="M2 2L16 10L2 18V2Z" fill="#E3EF26" stroke="#E3EF26" stroke-width="1.5"
-                  stroke-linejoin="round" />
-              </svg>
-            </div>
-            <div class="card-caption">
-              <div class="card-label">08 · Rain</div>
-              <div class="card-title">Mưa Chiều</div>
-            </div>
-          </div>
-          <div class="card" style="width:280px; height:30vh; transform:rotate(-1deg); align-self:center;"
-            data-src="rung1.mp4" data-label="09 · Green" data-title="Cỏ Xanh Mát">
-            <div class="card-bg"
-              style="background-image:url('https://images.unsplash.com/photo-1446329813274-7c9036bd9a1f?auto=format&fit=crop&w=700&q=85');">
+              style="background-image:url('https://images.pexels.com/photos/3603877/pexels-photo-3603877.jpeg?auto=compress&cs=tinysrgb&w=900');">
             </div>
             <div class="card-play-btn">
               <svg width="14" height="16" viewBox="0 0 18 20" fill="none">
-                <path d="M2 2L16 10L2 18V2Z" fill="#E3EF26" stroke="#E3EF26" stroke-width="1.5"
+                <path d="M2 2L16 10L2 18V2Z" fill="#FFFFFF" stroke="#FFFFFF" stroke-width="1.5"
                   stroke-linejoin="round" />
               </svg>
             </div>
             <div class="card-caption">
-              <div class="card-label">09 · Green</div>
-              <div class="card-title">Cỏ Xanh Mát</div>
+              <div class="card-label">08 · Rừng Tre</div>
+              <div class="card-title">Rừng Tre Xanh</div>
             </div>
           </div>
-          <div class="card" style="width:160px; height:18vh; transform:rotate(1.2deg); align-self:flex-end;"
-            data-src="rung1.mp4" data-label="10 · Summit" data-title="Đỉnh Núi">
+          <div class="card" style="width:240px; height:28vh; transform:rotate(-1deg); align-self:flex-end;"
+            data-src="4bHUsy74Fss" data-label="09 · Cầu Treo" data-title="Cầu Treo Giữa Rừng">
             <div class="card-bg"
-              style="background-image:url('https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=700&q=85');">
+              style="background-image:url('https://images.unsplash.com/photo-1510797215324-95aa89f43c33?auto=format&fit=crop&w=900&q=85');">
             </div>
             <div class="card-play-btn">
-              <svg width="12" height="14" viewBox="0 0 18 20" fill="none">
-                <path d="M2 2L16 10L2 18V2Z" fill="#E3EF26" stroke="#E3EF26" stroke-width="1.5"
+              <svg width="14" height="16" viewBox="0 0 18 20" fill="none">
+                <path d="M2 2L16 10L2 18V2Z" fill="#FFFFFF" stroke="#FFFFFF" stroke-width="1.5"
                   stroke-linejoin="round" />
               </svg>
             </div>
             <div class="card-caption">
-              <div class="card-label">10 · Summit</div>
-              <div class="card-title">Đỉnh Núi</div>
+              <div class="card-label">09 · Cầu Treo</div>
+              <div class="card-title">Cầu Treo Giữa Rừng</div>
             </div>
           </div>
         </div>
 
-        <!-- GROUP 7: Wide landscape, centered -->
+        <!-- GROUP 7: Bầu trời qua tán rừng — wide landscape -->
         <div class="scatter-group" style="width:480px; padding-top:20vh;">
-          <div class="card" style="width:440px; height:45vh; transform:rotate(0.4deg);" data-src="rung1.mp4"
-            data-label="11 · Ocean" data-title="Biển Xanh Vô Tận">
+          <div class="card" style="width:440px; height:45vh; transform:rotate(0.4deg);" data-src="4bHUsy74Fss"
+            data-label="10 · Bầu Trời" data-title="Trời Xanh Qua Tán Rừng">
             <div class="card-bg"
-              style="background-image:url('https://images.unsplash.com/photo-1505118380757-91f5f5632de0?auto=format&fit=crop&w=1200&q=85');">
+              style="background-image:url('https://images.unsplash.com/photo-1425913397330-cf8af2ff40a1?auto=format&fit=crop&w=1200&q=85');">
             </div>
             <div class="card-play-btn">
               <svg width="16" height="18" viewBox="0 0 18 20" fill="none">
-                <path d="M2 2L16 10L2 18V2Z" fill="#E3EF26" stroke="#E3EF26" stroke-width="1.5"
+                <path d="M2 2L16 10L2 18V2Z" fill="#FFFFFF" stroke="#FFFFFF" stroke-width="1.5"
                   stroke-linejoin="round" />
               </svg>
             </div>
             <div class="card-caption">
-              <div class="card-label">11 · Ocean</div>
-              <div class="card-title">Biển Xanh Vô Tận</div>
+              <div class="card-label">10 · Bầu Trời</div>
+              <div class="card-title">Trời Xanh Qua Tán Rừng</div>
             </div>
           </div>
         </div>
@@ -1013,115 +1026,43 @@
         <!-- TEXT 3 -->
         <div class="text-panel">
           <div class="text-num">03</div>
-          <h2 class="text-heading">Nước &amp;<br><em>Tĩnh Lặng</em></h2>
+          <h2 class="text-heading">Nước &amp;<br><em>Rừng Xanh</em></h2>
           <p class="text-body">Con suối chảy qua rừng già, tiếng nước hòa nhịp thở của thiên nhiên.</p>
           <span class="text-tag">Suối &amp; Thác</span>
         </div>
 
-        <!-- GROUP 8: Two mismatched -->
-        <div class="scatter-group" style="width:380px; padding-top:15vh; gap:22px;">
-          <div class="card" style="width:250px; height:35vh; transform:rotate(-2deg); align-self:flex-end;"
-            data-src="rung1.mp4" data-label="12 · Desert" data-title="Sa Mạc Vàng">
+        <!-- GROUP 8: Hồ rừng + Rừng thông sương — final -->
+        <div class="scatter-group" style="width:420px; padding-top:8vh; gap:22px;">
+          <div class="card" style="width:320px; height:40vh; transform:rotate(-0.8deg); align-self:flex-start;"
+            data-src="4bHUsy74Fss" data-label="11 · Hồ Rừng" data-title="Mặt Hồ Phản Chiếu">
             <div class="card-bg"
-              style="background-image:url('https://images.unsplash.com/photo-1509316785289-025f5b846b35?auto=format&fit=crop&w=1000&q=85');">
+              style="background-image:url('https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&w=1200&q=85');">
             </div>
             <div class="card-play-btn">
               <svg width="16" height="18" viewBox="0 0 18 20" fill="none">
-                <path d="M2 2L16 10L2 18V2Z" fill="#E3EF26" stroke="#E3EF26" stroke-width="1.5"
+                <path d="M2 2L16 10L2 18V2Z" fill="#FFFFFF" stroke="#FFFFFF" stroke-width="1.5"
                   stroke-linejoin="round" />
               </svg>
             </div>
             <div class="card-caption">
-              <div class="card-label">12 · Desert</div>
-              <div class="card-title">Sa Mạc Vàng</div>
+              <div class="card-label">11 · Hồ Rừng</div>
+              <div class="card-title">Mặt Hồ Phản Chiếu</div>
             </div>
           </div>
-          <div class="card" style="width:320px; height:28vh; transform:rotate(0.9deg); align-self:flex-start;"
-            data-src="rung1.mp4" data-label="13 · Cave" data-title="Hang Động Huyền Bí">
+          <div class="card" style="width:380px; height:50vh; transform:rotate(0.6deg); align-self:flex-end;"
+            data-src="4bHUsy74Fss" data-label="12 · Rừng Già" data-title="Rừng Cổ Thụ Ngàn Năm">
             <div class="card-bg"
-              style="background-image:url('https://images.unsplash.com/photo-1495211776-b9e87b04b57e?auto=format&fit=crop&w=900&q=85');">
+              style="background-image:url('https://images.unsplash.com/photo-1476231682828-37e571bc172f?auto=format&fit=crop&w=1200&q=85');">
             </div>
             <div class="card-play-btn">
               <svg width="16" height="18" viewBox="0 0 18 20" fill="none">
-                <path d="M2 2L16 10L2 18V2Z" fill="#E3EF26" stroke="#E3EF26" stroke-width="1.5"
+                <path d="M2 2L16 10L2 18V2Z" fill="#FFFFFF" stroke="#FFFFFF" stroke-width="1.5"
                   stroke-linejoin="round" />
               </svg>
             </div>
             <div class="card-caption">
-              <div class="card-label">13 · Cave</div>
-              <div class="card-title">Hang Động</div>
-            </div>
-          </div>
-        </div>
-
-        <!-- GROUP 9: Three vertical, tight -->
-        <div class="scatter-group" style="width:260px; padding-top:5vh; gap:14px;">
-          <div class="card" style="width:200px; height:20vh; transform:rotate(1.3deg); align-self:flex-end;"
-            data-src="rung1.mp4" data-label="14 · Frost" data-title="Băng Tuyết Trắng">
-            <div class="card-bg"
-              style="background-image:url('https://images.unsplash.com/photo-1491002052546-bf38f186af56?auto=format&fit=crop&w=700&q=85');">
-            </div>
-            <div class="card-play-btn">
-              <svg width="12" height="14" viewBox="0 0 18 20" fill="none">
-                <path d="M2 2L16 10L2 18V2Z" fill="#E3EF26" stroke="#E3EF26" stroke-width="1.5"
-                  stroke-linejoin="round" />
-              </svg>
-            </div>
-            <div class="card-caption">
-              <div class="card-label">14 · Frost</div>
-              <div class="card-title">Băng Tuyết</div>
-            </div>
-          </div>
-          <div class="card" style="width:230px; height:28vh; transform:rotate(-0.6deg); align-self:flex-start;"
-            data-src="rung1.mp4" data-label="15 · Meadow" data-title="Đồng Cỏ Xanh">
-            <div class="card-bg"
-              style="background-image:url('https://images.unsplash.com/photo-1440964829947-ca3277bd37f8?auto=format&fit=crop&w=700&q=85');">
-            </div>
-            <div class="card-play-btn">
-              <svg width="14" height="16" viewBox="0 0 18 20" fill="none">
-                <path d="M2 2L16 10L2 18V2Z" fill="#E3EF26" stroke="#E3EF26" stroke-width="1.5"
-                  stroke-linejoin="round" />
-              </svg>
-            </div>
-            <div class="card-caption">
-              <div class="card-label">15 · Meadow</div>
-              <div class="card-title">Đồng Cỏ Xanh</div>
-            </div>
-          </div>
-          <div class="card" style="width:180px; height:22vh; transform:rotate(1.8deg); align-self:center;"
-            data-src="rung1.mp4" data-label="16 · Dusk" data-title="Hoàng Hôn Tím">
-            <div class="card-bg"
-              style="background-image:url('https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=format&fit=crop&w=700&q=85');">
-            </div>
-            <div class="card-play-btn">
-              <svg width="12" height="14" viewBox="0 0 18 20" fill="none">
-                <path d="M2 2L16 10L2 18V2Z" fill="#E3EF26" stroke="#E3EF26" stroke-width="1.5"
-                  stroke-linejoin="round" />
-              </svg>
-            </div>
-            <div class="card-caption">
-              <div class="card-label">16 · Dusk</div>
-              <div class="card-title">Hoàng Hôn Tím</div>
-            </div>
-          </div>
-        </div>
-
-        <!-- GROUP 10: Final hero -->
-        <div class="scatter-group" style="width:460px; padding-top:8vh;">
-          <div class="card" style="width:420px; height:60vh; transform:rotate(-0.8deg);" data-src="rung1.mp4"
-            data-label="17 · Aurora" data-title="Cực Quang Bắc">
-            <div class="card-bg"
-              style="background-image:url('https://images.unsplash.com/photo-1531366936337-7c912a4589a7?auto=format&fit=crop&w=1400&q=85');">
-            </div>
-            <div class="card-play-btn">
-              <svg width="16" height="18" viewBox="0 0 18 20" fill="none">
-                <path d="M2 2L16 10L2 18V2Z" fill="#E3EF26" stroke="#E3EF26" stroke-width="1.5"
-                  stroke-linejoin="round" />
-              </svg>
-            </div>
-            <div class="card-caption">
-              <div class="card-label">17 · Aurora</div>
-              <div class="card-title">Cực Quang Bắc</div>
+              <div class="card-label">12 · Rừng Già</div>
+              <div class="card-title">Rừng Cổ Thụ Ngàn Năm</div>
             </div>
           </div>
         </div>
@@ -1140,17 +1081,24 @@
   </div><!-- /gallery -->
 
 
-  <!-- ════ FULLSCREEN PLAYER (local video) ════ -->
+  <!-- ════ FULLSCREEN PLAYER (YouTube embed) ════ -->
   <div id="player">
 
-    <!-- Native video element -->
-    <video id="vid-player" src="" autoplay controls loop playsinline style="
+    <!-- YouTube iframe player -->
+    <div id="vid-player-container" style="
       position:absolute;inset:0;
       width:100%;height:100%;
-      object-fit:contain;
       background:#000;
     ">
-    </video>
+      <iframe id="vid-player" 
+        width="100%" height="100%" 
+        frameborder="0" 
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+        allowfullscreen
+        style="background:#000;"
+        src="">
+      </iframe>
+    </div>
 
     <!-- TOP BAR -->
     <div id="player-topbar">
@@ -1279,7 +1227,7 @@
     document.getElementById('back-to-start').addEventListener('click', () => { targetX = 0; });
 
     // ══════════════════════════════════════════════════
-    //  FULLSCREEN PLAYER — local video
+    //  FULLSCREEN PLAYER — YouTube embed
     // ══════════════════════════════════════════════════
     const player = document.getElementById('player');
     const vidEl = document.getElementById('vid-player');
@@ -1287,52 +1235,89 @@
     const backBtn = document.getElementById('player-back-btn');
 
     let playerOpen = false;
+    let currentVideoName = '';
 
     // Focus mode state
     const focusBtn = document.getElementById('focus-mode-btn');
     let focusMode = false;
     let focusTimeout = null;
 
+    // Extract YouTube Video ID from various URL formats
+    // Supports: https://youtu.be/dQw4w9WgXcQ, https://youtube.com/watch?v=dQw4w9WgXcQ, or just dQw4w9WgXcQ
+    function getYouTubeVideoId(url) {
+      if (!url) return '';
+      // If it's already just an ID (11 chars, alphanumeric + -_ )
+      if (/^[a-zA-Z0-9-_]{11}$/.test(url)) return url;
+      
+      const patterns = [
+        /(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/)([a-zA-Z0-9-_]{11})/,
+      ];
+      
+      for (const pattern of patterns) {
+        const match = url.match(pattern);
+        if (match) return match[1];
+      }
+      return '';
+    }
+
     function openPlayer(src, label, title) {
       currentVideoName = src;
-      vidEl.src = src;
-      vidEl.play().catch(() => { });
+      const videoId = getYouTubeVideoId(src);
+      
+      if (!videoId) {
+        console.error('❌ Invalid YouTube URL:', src);
+        showPlayerError('Invalid video link', 'Please use a valid YouTube URL or video ID');
+        return;
+      }
+
+      console.log(`🎬 Opening player: "${title}" (${label})`);
+      console.log(`📹 YouTube Video ID: ${videoId}`);
+      
+      // Build YouTube embed URL with optimal parameters
+      // fs=1: enable fullscreen button
+      // autoplay=1: auto play
+      // rel=0: no recommended videos
+      // modestbranding=1: minimal YouTube branding
+      const embedUrl = `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&fs=1&modestbranding=1&playsinline=1`;
+      vidEl.src = embedUrl;
+      
       document.getElementById('player-label-el').textContent = label;
       document.getElementById('player-title-el').textContent = title;
       gallery.classList.add('hidden');
       player.classList.add('open');
       playerOpen = true;
       dragHint.classList.add('player-open');
+      
+      console.log('✅ Player opened - Use Focus Mode (Fn+F) for immersive viewing');
     }
 
-    // Video error handler
-    let currentVideoName = '';
-    vidEl.addEventListener('error', () => {
-      const fname = currentVideoName || 'video';
+    function showPlayerError(title, details) {
+      const oldMsg = document.getElementById('video-error-msg');
+      if(oldMsg) oldMsg.remove();
+
       const msg = document.createElement('div');
-      msg.style.cssText = 'position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#fff;font-family:Raleway,sans-serif;z-index:10;background:rgba(0,0,0,0.85);';
+      msg.id = 'video-error-msg';
+      msg.style.cssText = 'position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#fff;font-family:Raleway,sans-serif;z-index:10;background:rgba(0,0,0,0.95);padding:20px;overflow-y:auto;';
       msg.innerHTML = `
     <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#C4A97D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom:16px;">
       <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>
     </svg>
-    <div style="font-size:16px;font-weight:500;margin-bottom:8px;">Video không tải được</div>
-    <div style="font-size:12px;color:rgba(255,255,255,0.6);max-width:320px;text-align:center;line-height:1.5;">
-      File <strong>${fname}</strong> không phải video hợp lệ.<br>
-      Hãy thay thế bằng file .mp4 thật trong thư mục project.
+    <div style="font-size:16px;font-weight:500;margin-bottom:8px;">${title}</div>
+    <div style="font-size:12px;color:rgba(255,255,255,0.7);max-width:380px;text-align:center;line-height:1.6;margin-bottom:16px;">
+      ${details}
     </div>
   `;
       player.appendChild(msg);
-      const origClose = closePlayer;
-      closePlayer = function () { msg.remove(); origClose(); closePlayer = origClose; };
-      backBtn.onclick = closePlayer;
-    });
+    }
 
     function closePlayer() {
-      vidEl.pause();
       vidEl.src = '';
+      
+      const errorMsg = document.getElementById('video-error-msg');
+      if(errorMsg) errorMsg.remove();
+
       focusMode = false;
       player.classList.remove('focus-mode', 'reveal-controls');
-      vidEl.controls = true;
       focusBtn.classList.remove('active');
       clearTimeout(focusTimeout);
 
@@ -1349,7 +1334,6 @@
       focusMode = !focusMode;
       focusBtn.classList.toggle('active', focusMode);
       player.classList.toggle('focus-mode', focusMode);
-      vidEl.controls = !focusMode;
       if (focusMode) {
         player.classList.add('reveal-controls');
         clearTimeout(focusTimeout);
@@ -1377,8 +1361,27 @@
       if (focusMode) toggleFocus();
     });
 
+    // Keyboard shortcuts
+    document.addEventListener('keydown', (e) => {
+      if (!playerOpen) return;
+      
+      // 'F' key: Toggle Focus Mode
+      if (e.key.toLowerCase() === 'f') {
+        e.preventDefault();
+        toggleFocus();
+        console.log('🎯 Focus Mode toggled');
+      }
+      
+      // 'Escape' key: Close player and back to library
+      if (e.key === 'Escape') {
+        e.preventDefault();
+        closePlayer();
+        console.log('← Back to Library');
+      }
+    });
+
     // Wire up all cards with data-src
-    document.querySelectorAll('[data-src]').forEach((card) => {
+    document.querySelectorAll('[data-src]').forEach((card, idx) => {
       card.addEventListener('click', (e) => {
         if (Math.abs(mouseDownX - e.clientX) > 8) return;
         openPlayer(
@@ -1389,7 +1392,14 @@
       });
     });
 
-    console.log('[Gallery] Cards:', document.querySelectorAll('[data-src]').length);
+    const totalCards = document.querySelectorAll('[data-src]').length;
+    console.log(`✅ Gallery ready! ${totalCards} cards loaded`);
+    console.log('%c🎬 PLAYER FEATURES:', 'color:#E3EF26;font-size:14px;font-weight:bold;');
+    console.log('%c→ Click any card to open video', 'color:#E8F0E8;');
+    console.log('%c→ Press "F" to toggle Focus Mode (minimal UI for concentration)', 'color:#E8F0E8;');
+    console.log('%c→ Press "Esc" or click "Back to Library" to return to gallery', 'color:#E8F0E8;');
+    console.log('%c→ Click fullscreen button on video player for HD/4K viewing', 'color:#E8F0E8;');
+    console.log('%c→ Mouse over video when in Focus Mode to show back button', 'color:#E8F0E8;');
   </script>
 </body>
 
